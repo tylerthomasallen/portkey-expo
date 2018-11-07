@@ -1,10 +1,17 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-    blue: {
-        backgroundColor: 'blue',
-        flex: 1
+    container: {
+        backgroundColor: 'white',
+        flex: 1,
+        margin: 20
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginBottom: 5
     }
 });
 
@@ -15,8 +22,15 @@ class SplashSearch extends React.Component {
 
         return(
             <View style={
-                styles.blue
+                styles.container
             }>
+            <Text>
+                Hi there
+            </Text>
+
+            <Text style={styles.title}>
+                Where are you going?            
+            </Text>
 
             </View>
         );
