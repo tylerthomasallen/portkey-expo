@@ -1,22 +1,32 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { MapView } from 'expo';
 
 const styles = StyleSheet.create({
-    red: {
-        backgroundColor: 'red',
+    container: {
         flex: 2
     }
 });
+
+const region = {
+    latitude: 37.754090,
+    longitude: -122.413934,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+};
 
 class Map extends React.Component {
 
     render() {
         return (
-            <View style={
-                styles.red
-            }>
+            <MapView 
+            style={styles.container}
+            region={region}
+            showsUserLocation
+            showsMyLocationButton
+            >
 
-            </View>
+            </MapView>
         );
     }
 }
