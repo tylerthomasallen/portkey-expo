@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     },
 
     greeting: {
-        fontSize: 18, 
+        fontSize: 16, 
     },
 
     title: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold'
     },
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         borderColor: '#BDBDBD',
         borderWidth: .5,
         borderRadius: 10,
-        padding: 5,
+        padding: 10,
         flexDirection: 'row',
         marginTop: 10,
         marginBottom: 0
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0,
         shadowColor: 'white',
         margin: 5
-
     },
 
     addressContainer: {
@@ -120,7 +119,8 @@ class SplashSearch extends React.Component {
                         <TextInput
                             style={styles.input}
                             placeholder="Search destination"
-                        >  
+                            placeholderTextColor= 'black'
+                    >  
                         </TextInput>
                     </View>
 
