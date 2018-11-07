@@ -1,39 +1,44 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        margin: 20
+        marginTop: 5,
+        marginBottom: 10
     },
+
+    upperContainer: {
+        margin: 10,
+        marginBottom: 5
+    },
+
+    greeting: {
+        fontSize: 18, 
+    },
+
     title: {
         fontSize: 24,
-        fontWeight: 'bold',
-        marginTop: 5,
-        marginBottom: 5
+        fontWeight: 'bold'
     },
 
     inputContainer: {
         fontSize: 18,
         borderColor: '#BDBDBD',
         borderWidth: .5,
-        borderRadius: 5,
-        padding: 10,
-        marginTop: 10,
+        borderRadius: 10,
+        padding: 5,
         flexDirection: 'row',
-        shadowColor: '#BDBDBD',
-        shadowOffset: {width: 0, height: 0},
-        shadowOpacity: 1,
-        shadowRadius: 2
+        marginTop: 10,
+        marginBottom: 0
     },
 
     searchButton: {
         margin: 5,
         fontSize: 28,
-        color: 'blue',
-        fontWeight: '900'
+        color: '#FF8484'
 
     },
 
@@ -44,28 +49,24 @@ const styles = StyleSheet.create({
 
     },
 
-    shadow: {
-        backgroundColor: '#BDBDBD',
-        padding: .5,
-        width: '98%',
-        alignSelf: 'center',
-        borderRadius: 5,
-        opacity: .3
-    },
-
     addressContainer: {
-        margin: 10,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
+        paddingBottom: 10
+
     },
 
     starContainer: {
-        backgroundColor: 'pink',
+        backgroundColor: '#FF8484',
         width: 30,
         height: 30,
         borderRadius: 15,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10
     },
 
     star: {
@@ -74,7 +75,15 @@ const styles = StyleSheet.create({
     },
 
     address: {
-        flexDirection: 'column',
+        flexDirection: 'column'
+    },
+
+    addressTitle: {
+        fontWeight: '500'
+    },
+
+    streetAddress: {
+        color: '#BDBDBD'
     }
 
 
@@ -84,6 +93,10 @@ const styles = StyleSheet.create({
 
 class SplashSearch extends React.Component {
 
+    onPress = () => {
+
+    }
+
 
     render() {
 
@@ -91,34 +104,53 @@ class SplashSearch extends React.Component {
             <View style={
                 styles.container
             }>
-                <Text style={{fontSize: 18}}>
-                    Hi there
-                </Text>
 
-                <Text style={styles.title}>
-                    Where are you going?            
-                </Text>
+                <View style={styles.upperContainer}>
 
-                <View style={styles.inputContainer}>
-                    <Ionicons name="ios-search" style={styles.searchButton}/>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Search destination"
-                    >  
-                    </TextInput>
-                </View>
-            
-                <View style={styles.shadow} />
+                    <Text style={styles.greeting}>
+                        Hey, Tyler
+                    </Text>
 
-                <View style={styles.addressContainer}>
-                    <View style={styles.starContainer}>
-                        <Ionicons name="ios-star" style={styles.star}/>
+                    <Text style={styles.title}>
+                        Where are you going?            
+                    </Text>
+
+                    <View style={styles.inputContainer}>
+                        <Ionicons name="ios-search" style={styles.searchButton}/>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Search destination"
+                        >  
+                        </TextInput>
                     </View>
-                    <View styles={styles.address}>
-                        <Text>Ginnas Place</Text>
-                        <Text>2268 Jackson St, San Francisco</Text>
-                    </View>
+
                 </View>
+
+                <TouchableHighlight style={styles.touchable} onPress={this.onPress}>    
+                    <View style={styles.addressContainer}>
+                        <View style={styles.starContainer}>
+                            <Ionicons name="ios-star" style={styles.star}/>
+                        </View>
+                        <View styles={styles.address}>
+                            <Text style={styles.addressTitle}>Ginnas Place</Text>
+                            <Text style={styles.streetAddress}>2268 Jackson St, San Francisco</Text>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.touchable} onPress={this.onPress}>    
+                    <View style={styles.addressContainer}>
+                        <View style={styles.starContainer}>
+                            <Ionicons name="ios-star" style={styles.star} />
+                        </View>
+                        <View styles={styles.address}>
+                            <Text style={styles.addressTitle}>Tyler's Place</Text>
+                            <Text style={styles.streetAddress}>2713 Folsom St, San Francisco</Text>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
+
 
             </View>
         );
