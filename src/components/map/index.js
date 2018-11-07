@@ -17,6 +17,13 @@ const region = {
 
 class Map extends React.Component {
 
+    renderMarkers() {
+        const Marker = MapView.Marker;
+        return (
+            <Marker title='test' coordinate={{ latitude: 37.761867, longitude: -122.421671}} />
+        );
+    }
+
     render() {
         return (
             <MapView 
@@ -25,6 +32,8 @@ class Map extends React.Component {
             showsUserLocation
             showsMyLocationButton
             >
+
+            {this.renderMarkers()}
 
             </MapView>
         );
