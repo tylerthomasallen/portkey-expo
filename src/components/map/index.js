@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
+import Axios from 'axios';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,6 +17,17 @@ const region = {
 };
 
 class Map extends React.Component {
+
+
+    componentDidMount() {
+        debugger;
+
+        return fetch('http://10.0.1.198:3000/api/lyft');
+
+    //     Axios.get('http://localhost:3000/api/lyft')
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err));
+    }
 
     renderMarkers() {
         const Marker = MapView.Marker;
