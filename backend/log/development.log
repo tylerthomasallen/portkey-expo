@@ -156,3 +156,302 @@ Processing by Api::LyftController#index as JSON
 Completed 200 OK in 7196ms (Views: 14.7ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/api/lyft" for 10.0.1.73 at 2018-11-09 10:48:27 -0800
+Cannot render console from 10.0.1.73! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (2.8ms)
+Completed 200 OK in 18ms (Views: 17.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 10.0.1.198 at 2018-11-09 10:48:48 -0800
+Cannot render console from 10.0.1.198! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (0.3ms)
+Completed 200 OK in 15ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-09 13:55:27 -0800
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tylerallen/.rvm/gems/ruby-2.5.1/gems/railties-5.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tylerallen/.rvm/gems/ruby-2.5.1/gems/railties-5.2.1/lib/rails/templates/rails/welcome/index.html.erb (4.6ms)
+Completed 200 OK in 15ms (Views: 11.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-09 13:55:35 -0800
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tylerallen/.rvm/gems/ruby-2.5.1/gems/railties-5.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tylerallen/.rvm/gems/ruby-2.5.1/gems/railties-5.2.1/lib/rails/templates/rails/welcome/index.html.erb (2.4ms)
+Completed 200 OK in 9ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:55:43 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant Lyft::Api::Api::CLIENT_SECRET:
+  app/api/lyft/api.rb:12:in `<class:Api>'
+  app/api/lyft/api.rb:5:in `<module:Api>'
+  app/api/lyft/api.rb:4:in `<module:Lyft>'
+  app/api/lyft/api.rb:3:in `<main>'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/404ffacd1c577c25/variables" for 127.0.0.1 at 2018-11-09 13:55:44 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:56:48 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:56:58 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant Lyft::Api::Api::CLIENT_SECRET:
+  app/api/lyft/api.rb:12:in `<class:Api>'
+  app/api/lyft/api.rb:5:in `<module:Api>'
+  app/api/lyft/api.rb:4:in `<module:Lyft>'
+  app/api/lyft/api.rb:3:in `<main>'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant Lyft::Api::Api::CLIENT_SECRET:
+  app/api/lyft/api.rb:12:in `<class:Api>'
+  app/api/lyft/api.rb:5:in `<module:Api>'
+  app/api/lyft/api.rb:4:in `<module:Lyft>'
+  app/api/lyft/api.rb:3:in `<main>'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/374513efff63c6b4/variables" for 127.0.0.1 at 2018-11-09 13:56:59 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:57:30 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 16404ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `post' for Lyft::Api::Api:Class:
+  app/api/lyft/api.rb:23:in `access_token'
+  app/controllers/api/lyft_controller.rb:8:in `index'
+
+Started POST "/__better_errors/0fbcdee6d0bcf314/variables" for 127.0.0.1 at 2018-11-09 13:57:47 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:59:01 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 3733ms (ActiveRecord: 0.0ms)
+
+
+
+TypeError - no implicit conversion of HTTParty::Response into String:
+  app/api/lyft/api.rb:32:in `handle_response'
+  app/api/lyft/api.rb:23:in `access_token'
+  app/controllers/api/lyft_controller.rb:8:in `index'
+
+Started POST "/__better_errors/29e28135e1373430/variables" for 127.0.0.1 at 2018-11-09 13:59:05 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 13:59:38 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (6.1ms)
+Completed 200 OK in 4458ms (Views: 28.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:00:00 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (8.1ms)
+Completed 200 OK in 115752ms (Views: 79.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:01:59 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:02:09 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant Lyft::Api::Api::Content:
+  app/api/lyft/api.rb:12:in `<class:Api>'
+  app/api/lyft/api.rb:5:in `<module:Api>'
+  app/api/lyft/api.rb:4:in `<module:Lyft>'
+  app/api/lyft/api.rb:3:in `<main>'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant Lyft::Api::Api::Content:
+  app/api/lyft/api.rb:12:in `<class:Api>'
+  app/api/lyft/api.rb:5:in `<module:Api>'
+  app/api/lyft/api.rb:4:in `<module:Lyft>'
+  app/api/lyft/api.rb:3:in `<main>'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/c06a0fe6f2220af4/variables" for 127.0.0.1 at 2018-11-09 14:02:09 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:03:58 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected keyword_end, expecting ')'
+            end
+            ^~~
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:38: syntax error, unexpected end-of-input, expecting keyword_end:
+  app/api/lyft/api.rb:29:in `'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/bf5f0901a9525f35/variables" for 127.0.0.1 at 2018-11-09 14:03:58 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:04:25 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 6367ms (ActiveRecord: 0.0ms)
+
+
+
+ArgumentError - wrong number of arguments (given 3, expected 1..2):
+  app/api/lyft/api.rb:24:in `access_token'
+  app/controllers/api/lyft_controller.rb:8:in `index'
+
+Started POST "/__better_errors/1cc5b698dd725b5d/variables" for 127.0.0.1 at 2018-11-09 14:04:31 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:06:34 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (4.4ms)
+Completed 200 OK in 5981ms (Views: 23.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:06:51 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (12.2ms)
+Completed 200 OK in 118104ms (Views: 99.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:08:57 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected ')', expecting '}'
+...                 :body => BODY)  
+...                              ^
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:40: syntax error, unexpected end-of-input, expecting keyword_end:
+  app/api/lyft/api.rb:27:in `'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/87f7c293a729139d/variables" for 127.0.0.1 at 2018-11-09 14:08:58 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:09:16 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (4.0ms)
+Completed 200 OK in 129440ms (Views: 64.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:11:47 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (4.1ms)
+Completed 200 OK in 11269ms (Views: 24.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:16:51 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected tSTRING_BEG, expecting '}'
+                      "body": {
+                      ^
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:35: syntax error, unexpected ':', expecting keyword_end
+                      "body": {
+                            ^
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:39: syntax error, unexpected '}', expecting keyword_end
+                    })
+                    ^
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:51: syntax error, unexpected end-of-input, expecting keyword_end:
+  app/api/lyft/api.rb:35:in `'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/b35107ba71a47afe/variables" for 127.0.0.1 at 2018-11-09 14:17:02 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:17:13 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (1.6ms)
+Completed 200 OK in 5493ms (Views: 17.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:17:27 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (146.8ms)
+Completed 200 OK in 59236ms (Views: 233.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:18:30 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (0.5ms)
+Completed 200 OK in 19569ms (Views: 18.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:19:03 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (0.6ms)
+Completed 200 OK in 15464ms (Views: 21.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:19:21 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (0.4ms)
+Completed 200 OK in 3326ms (Views: 14.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:19:33 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (6.9ms)
+Completed 200 OK in 176195ms (Views: 69.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:44:08 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (1.4ms)
+Completed 200 OK in 2529ms (Views: 22.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:44:32 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (8.1ms)
+Completed 200 OK in 66581ms (Views: 80.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:45:51 -0800
+Processing by Api::LyftController#index as JSON
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected keyword_end, expecting ')'
+            end
+            ^~~
+/Users/tylerallen/Desktop/Mobile/portkey-expo/backend/app/api/lyft/api.rb:49: syntax error, unexpected end-of-input, expecting keyword_end:
+  app/api/lyft/api.rb:40:in `'
+  app/controllers/api/lyft_controller.rb:6:in `index'
+
+Started POST "/__better_errors/18cec240fc5393d0/variables" for 127.0.0.1 at 2018-11-09 14:45:51 -0800
+Started GET "/api/lyft" for 127.0.0.1 at 2018-11-09 14:46:18 -0800
+Processing by Api::LyftController#index as JSON
+  Rendering api/lyft/index.json.jbuilder
+  Rendered api/lyft/index.json.jbuilder (2.4ms)
+Completed 200 OK in 11128ms (Views: 16.9ms | ActiveRecord: 0.0ms)
+
+

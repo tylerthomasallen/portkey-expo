@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 import Axios from 'axios';
+let base64 = require('base-64');
 
 const styles = StyleSheet.create({
     container: {
@@ -20,13 +21,19 @@ class Map extends React.Component {
 
 
     componentDidMount() {
-        debugger;
 
-        return fetch('http://10.0.1.198:3000/api/lyft');
-
-    //     Axios.get('http://localhost:3000/api/lyft')
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err));
+        fetch('https://api.lyft.com/oauth/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
+            },
+            body: JSON.stringify({
+                grant_type: "client_credentials",
+                scope: 'public',
+            }),
+        }).then(res => res.json())
+        .then(resJSON => console.log(resJSON));
     }
 
     renderMarkers() {

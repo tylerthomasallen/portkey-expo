@@ -1,7 +1,12 @@
+
+
 class Api::LyftController < ApplicationController
 
     def index
-        debugger;
-        render "api/lyft/index"
+        @api = Lyft::Api::Api.new
+        @response = @api.access_token
+        debugger
+        # render "api/lyft/index"
+        # render json: {}, status: :ok
     end
 end
