@@ -17,35 +17,57 @@ const region = {
     longitudeDelta: 0.0421
 };
 
+const sampleTrip = {
+    endLat: 37.793108,
+    endLng: -122.432374,
+    startLat: region.latitude,
+    startLng: region.longitude
+}
+
 class Map extends React.Component {
 
     constructor(props) {
         super(props)
-        // this.state = {
-
-        // }
+        this.state = {
+            accessToken: 'CXdd357i04F8ZYf5/b/b+pxhGAssltwnsa+L5RLPyRoPOEWFB5go+9WZVX5WXm4iBFuo0LXAyhugKd6fsDBBfEbqHysmFWA74eoVWaEW7bulRbvfHdBY1BE='
+        }
     }
 
 
     async componentDidMount() {
+        // try {
+        //     let response = await fetch('https://api.lyft.com/oauth/token', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
+        //         },
+        //         body: JSON.stringify({
+        //             grant_type: "client_credentials",
+        //             scope: 'public',
+        //         })
+        //     });
+        //     let responseJSON = await response.json();
+        //     let token = responseJSON.access_token;
+        //     debugger
+        // } catch (error) {
+        //     console.log(error)
+        // }
 
         try {
-            let response = await fetch('https://api.lyft.com/oauth/token', {
-                method: 'POST',
+            let response = await fetch(
+                `https://api.lyft.com/v1/cost?start_lat=${sampleTrip.startLat}&start_lng=${sampleTrip.startLng}&end_lat=${sampleTrip.endLat}&end_lng=${sampleTrip.endLng}`, {
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
-                },
-                body: JSON.stringify({
-                    grant_type: "client_credentials",
-                    scope: 'public',
-                }),
+                    'Authorization': `bearer ${this.state.accessToken}`
+                }
             });
             let responseJSON = await response.json();
-            debugger
+            debugger;
         } catch (error) {
             console.log(error)
         }
+
     }
 
     renderMarkers() {
