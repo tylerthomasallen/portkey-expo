@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 import Axios from 'axios';
-let base64 = require('base-64');
+const base64 = require('base-64');
 
 const styles = StyleSheet.create({
     container: {
@@ -19,21 +19,33 @@ const region = {
 
 class Map extends React.Component {
 
+    constructor(props) {
+        super(props)
+        // this.state = {
 
-    componentDidMount() {
+        // }
+    }
 
-        fetch('https://api.lyft.com/oauth/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
-            },
-            body: JSON.stringify({
-                grant_type: "client_credentials",
-                scope: 'public',
-            }),
-        }).then(res => res.json())
-        .then(resJSON => console.log(resJSON));
+
+    async componentDidMount() {
+
+        try {
+            let response = await fetch('https://api.lyft.com/oauth/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
+                },
+                body: JSON.stringify({
+                    grant_type: "client_credentials",
+                    scope: 'public',
+                }),
+            });
+            let responseJSON = await response.json();
+            debugger
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     renderMarkers() {
