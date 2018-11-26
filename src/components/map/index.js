@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 import Axios from 'axios';
-const base64 = require('base-64');
+import { lyftAuthToken, lyftCost } from './apiCalls';
 
 const styles = StyleSheet.create({
     container: {
@@ -35,44 +35,17 @@ class Map extends React.Component {
 
 
     async componentDidMount() {
-        
-        // Used to get access token for lyft API, which expires daily. Commented out for now to avoid getting a new token every refresh
-        
-        // debugger
-        // try {
-        //     let tokenRes = await fetch('https://api.lyft.com/oauth/token', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': "Basic " + base64.encode("aERGoL7SWDbx:GjX02y9Rrp3q79obFfhHUW_Y4zZCiHe3")
-        //         },
-        //         body: JSON.stringify({
-        //             grant_type: "client_credentials",
-        //             scope: 'public',
-        //         })
-        //     });
-        //     let tokenResJSON = await tokenRes.json();
-        //     let token = tokenResJSON.access_token;
-        //     this.setState({accessToken: token})
-        //     debugger;
-        // } catch (error) {
-        //     console.log(error)
-        // }
 
-        try {
-            let costResponse = await fetch(
-                `https://api.lyft.com/v1/cost?start_lat=${sampleTrip.startLat}&start_lng=${sampleTrip.startLng}&end_lat=${sampleTrip.endLat}&end_lng=${sampleTrip.endLng}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `bearer ${this.state.accessToken}`
-                }
-            });
-            let costJSON = await costResponse.json();
-            debugger;
-        } catch (error) {
-            console.log(error)
-        }
+        // get lyftAuthToken
 
+        // const accessToken = await lyftAuthToken();
+        // this.setState({accessToken})
+        // debugger;
+
+        // get prices based on sampleTrip
+
+        // const prices = await lyftCost(this.state.accessToken, sampleTrip);
+        // debugger;
     }
 
     renderMarkers() {
