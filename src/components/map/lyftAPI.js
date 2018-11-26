@@ -48,7 +48,6 @@ export const lyftNearbyRides = async (accessToken, sampleTrip) => {
                 }
             });
         let driverJSON = await rideResponse.json();
-        debugger;
         return driverJSON;
     } catch (error) {
         console.log(error)
