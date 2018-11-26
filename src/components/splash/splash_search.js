@@ -96,6 +96,10 @@ class SplashSearch extends React.Component {
 
     }
 
+    handlePress = () => {
+        debugger;
+    }
+
 
     render() {
 
@@ -114,7 +118,7 @@ class SplashSearch extends React.Component {
                         Where are you going?            
                     </Text>
 
-                    <View style={styles.inputContainer}>
+                    <View style={styles.inputContainer} onPress={this.handlePress}>
                         <Ionicons name="ios-search" style={styles.searchButton}/>
                         <TextInput
                             style={styles.input}

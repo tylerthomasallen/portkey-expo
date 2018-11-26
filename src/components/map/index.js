@@ -75,6 +75,7 @@ class Map extends React.Component {
             region={region}
             showsUserLocation
             showsMyLocationButton
+            followsUserLocation
             >
 
             {this.state.normalDrivers.map((driver, idx) => {
