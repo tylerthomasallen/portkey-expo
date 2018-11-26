@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableHighlight, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
 
     inputContainer: {
-        fontSize: 18,
+        // fontSize: 18,
         borderColor: '#BDBDBD',
         borderWidth: .5,
         borderRadius: 10,
@@ -118,15 +118,18 @@ class SplashSearch extends React.Component {
                         Where are you going?            
                     </Text>
 
-                    <View style={styles.inputContainer} onPress={this.handlePress}>
-                        <Ionicons name="ios-search" style={styles.searchButton}/>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Search destination"
-                            placeholderTextColor= 'black'
-                    >  
-                        </TextInput>
-                    </View>
+                    <TouchableHighlight onPress={this.handlePress}>
+                        <View style={styles.inputContainer} onPress={this.handlePress}>
+                            <Ionicons name="ios-search" style={styles.searchButton}/>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Search destination"
+                                placeholderTextColor= 'black'
+                        >  
+                            </TextInput>
+                        </View>
+                    </TouchableHighlight>
+
 
                 </View>
 

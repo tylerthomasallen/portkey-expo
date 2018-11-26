@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
 const region = {
     latitude: 37.754090,
     longitude: -122.413934,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
+    latitudeDelta: 0.03,
+    longitudeDelta: 0.01
 };
 
 const sampleTrip = {
