@@ -29,14 +29,18 @@ class Map extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            accessToken: 'CXdd357i04F8ZYf5/b/b+pxhGAssltwnsa+L5RLPyRoPOEWFB5go+9WZVX5WXm4iBFuo0LXAyhugKd6fsDBBfEbqHysmFWA74eoVWaEW7bulRbvfHdBY1BE='
+            accessToken: 'pTxkglGJvqtF9xWHoer/GDMf3pJM37/oTc+z5htSPYQfeIKIILzd3zb9uoCWAY+tBlKjgjYrCrshvChaFHjqCFSP/8SwsCIhYpxWnUB7MSPOr+U27F51zsc='
         }
     }
 
 
     async componentDidMount() {
+        
+        // Used to get access token for lyft API, which expires daily. Commented out for now to avoid getting a new token every refresh
+        
+        // debugger
         // try {
-        //     let response = await fetch('https://api.lyft.com/oauth/token', {
+        //     let tokenRes = await fetch('https://api.lyft.com/oauth/token', {
         //         method: 'POST',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -47,22 +51,23 @@ class Map extends React.Component {
         //             scope: 'public',
         //         })
         //     });
-        //     let responseJSON = await response.json();
-        //     let token = responseJSON.access_token;
-        //     debugger
+        //     let tokenResJSON = await tokenRes.json();
+        //     let token = tokenResJSON.access_token;
+        //     this.setState({accessToken: token})
+        //     debugger;
         // } catch (error) {
         //     console.log(error)
         // }
 
         try {
-            let response = await fetch(
+            let costResponse = await fetch(
                 `https://api.lyft.com/v1/cost?start_lat=${sampleTrip.startLat}&start_lng=${sampleTrip.startLng}&end_lat=${sampleTrip.endLat}&end_lng=${sampleTrip.endLng}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `bearer ${this.state.accessToken}`
                 }
             });
-            let responseJSON = await response.json();
+            let costJSON = await costResponse.json();
             debugger;
         } catch (error) {
             console.log(error)
