@@ -69,9 +69,6 @@ class Map extends React.Component {
 
     render() {
         const Marker = MapView.Marker
-        if (this.state.normalDrivers.length >= 1) {
-            debugger;
-        }
         return (
             <MapView 
             style={styles.container}
@@ -81,7 +78,7 @@ class Map extends React.Component {
             >
 
             {this.state.normalDrivers.map((driver, idx) => {
-                return <Marker key={idx} title='test' coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
+                return <Marker key={idx} title='test' image={require('./car.png')} coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
             })}
 
             {/* {this.renderMarkers()} */}
