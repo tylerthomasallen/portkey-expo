@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 import Axios from 'axios';
-import { lyftAuthToken, lyftCost } from './apiCalls';
+import { lyftAuthToken, lyftCost, lyftNearbyRides } from './lyftAPI';
 
 const styles = StyleSheet.create({
     container: {
@@ -46,6 +46,9 @@ class Map extends React.Component {
 
         // const prices = await lyftCost(this.state.accessToken, sampleTrip);
         // debugger;
+
+        const nearbyRides = await lyftNearbyRides(this.state.accessToken, sampleTrip);
+        debugger;
     }
 
     renderMarkers() {

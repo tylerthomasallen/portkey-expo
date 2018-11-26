@@ -37,3 +37,20 @@ export const lyftCost = async (accessToken, sampleTrip) => {
         console.log(error)
     }
 }
+
+export const lyftNearbyRides = async (accessToken, sampleTrip) => {
+    try {
+        let rideResponse = await fetch(
+            `https://api.lyft.com/v1/drivers?lat=${sampleTrip.startLat}&lng=${sampleTrip.startLng}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `bearer ${accessToken}`
+                }
+            });
+        let driverJSON = await rideResponse.json();
+        debugger;
+        return driverJSON;
+    } catch (error) {
+        console.log(error)
+    }
+}
