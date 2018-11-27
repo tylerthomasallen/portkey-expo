@@ -29,7 +29,7 @@ class Map extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            accessToken: 'pTxkglGJvqtF9xWHoer/GDMf3pJM37/oTc+z5htSPYQfeIKIILzd3zb9uoCWAY+tBlKjgjYrCrshvChaFHjqCFSP/8SwsCIhYpxWnUB7MSPOr+U27F51zsc=',
+            accessToken: '',
             normalDrivers: []
         }
     }
@@ -37,19 +37,16 @@ class Map extends React.Component {
 
     async componentDidMount() {
 
-        // get lyftAuthToken
-
-        // const accessToken = await lyftAuthToken();
-        // this.setState({accessToken})
-        // debugger;
-
-        // get prices based on sampleTrip
+        const accessToken = await lyftAuthToken();
+        this.setState({accessToken})
+        debugger;
 
         // const prices = await lyftCost(this.state.accessToken, sampleTrip);
         // debugger;
 
         const nearbyRides = await lyftNearbyRides(this.state.accessToken, sampleTrip);
         const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
+        debugger;
         this.setState({normalDrivers})
     }
 
