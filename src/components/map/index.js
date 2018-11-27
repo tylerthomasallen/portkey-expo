@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { MapView } from 'expo';
-import Axios from 'axios';
-import { lyftAuthToken, lyftCost, lyftNearbyRides } from './lyftAPI';
+import { lyftAuthToken, lyftCost, lyftNearbyRides } from '../../api/lyft';
 
 const styles = StyleSheet.create({
     container: {

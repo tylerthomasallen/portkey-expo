@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import Map from '../map';
 import SplashSearch from './splash_search';
+import Price from '../price';
 
 class Splash extends React.Component {
 
@@ -10,10 +11,12 @@ class Splash extends React.Component {
         return (
             <View style={{flex: 1}}>
                 <Map />
-                <SplashSearch />
+                <Price />
             </View>
         );
     }
 }
+
+//  <SplashSearch />
 
 export default Splash;
