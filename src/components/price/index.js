@@ -16,6 +16,21 @@ const styles = StyleSheet.create({
 
 class Price extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            lyftPrices: []
+        }
+    }
+
+    async componentDidMount() {
+
+        // const accessToken = await lyftAuthToken();
+        // this.setState({ accessToken })
+        // debugger;
+
+    }
+
     render() {
         return (
             <View style={styles.container}>

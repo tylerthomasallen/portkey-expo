@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { MapView } from 'expo';
 import { lyftAuthToken, lyftCost, lyftNearbyRides } from '../../api/lyft';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     container: {
@@ -86,4 +87,18 @@ class Map extends React.Component {
     }
 }
 
-export default Map;
+const mapStateToProps = ({ prices, authToken }) => {
+    return {
+        prices,
+        authToken
+    }
+};
+
+const mapDispatchToProps = dispatch => ({
+   lyftAuthToken: () => dispatch(yelpSearch(searchInfo))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Map);

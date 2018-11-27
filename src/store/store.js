@@ -1,11 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers/root_reducer';
-import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
+
+const preloadedState = {
+    currentLocation: {}
+};
 
 
 const store = createStore(
         rootReducer,
-        applyMiddleware(createSagaMiddleware)
+        preloadedState,
+        applyMiddleware(thunk)
     );
 
 export default store;
