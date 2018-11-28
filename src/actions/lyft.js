@@ -11,7 +11,6 @@ export const receiveLyftToken = authToken => {
 
 
 export const getLyftToken = () => dispatch => {
-    debugger;
     return (
         lyftAuthToken().then(
             authToken => dispatch(receiveLyftToken(authToken))

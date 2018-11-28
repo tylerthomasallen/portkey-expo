@@ -4,22 +4,6 @@ import { connect } from 'react-redux';
 import { lyftCost } from '../../api/lyft';
 import { Ionicons } from '@expo/vector-icons';
 
-const region = {
-    latitude: 37.754090,
-    longitude: -122.413934,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
-    // latitudeDelta: 0.03,
-    // longitudeDelta: 0.01
-};
-
-const sampleTrip = {
-    endLat: 37.793108,
-    endLng: -122.432374,
-    startLat: region.latitude,
-    startLng: region.longitude
-}
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
@@ -116,6 +100,22 @@ const styles = StyleSheet.create({
     }
 })
 
+const region = {
+    latitude: 37.754090,
+    longitude: -122.413934,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+    // latitudeDelta: 0.03,
+    // longitudeDelta: 0.01
+};
+
+const sampleTrip = {
+    endLat: 37.793108,
+    endLng: -122.432374,
+    startLat: region.latitude,
+    startLng: region.longitude
+}
+
 
 
 class Price extends React.Component {
@@ -123,7 +123,7 @@ class Price extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            prices: []
+           lyftPrice: ''
         }
     }
 
@@ -133,6 +133,15 @@ class Price extends React.Component {
 
     async componentDidMount() {
         const prices = await lyftCost(this.props.authToken, sampleTrip);
+        const estimatedPriceCents = prices.cost_estimates[0].estimated_cost_cents_min;
+        const dollars = estimatedPriceCents / 100;
+        let cents = estimatedPriceCents % 100;
+
+        if (cents < 10) {
+            cents = `0${cents}`
+        }
+
+        this.setState({lyftPrice: `$${dollars}.${cents}`})
         debugger;
     }
 
@@ -158,7 +167,7 @@ class Price extends React.Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={styles.price}>$8.49</Text>
+                        <Text style={styles.price}>{this.state.lyftPrice}</Text>
                         <Text style={styles.eta}>11:20 AM</Text>
                     </View>
                 </View>
