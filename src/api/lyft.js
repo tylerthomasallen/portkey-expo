@@ -1,6 +1,7 @@
 const base64 = require('base-64');
 
 export const lyftAuthToken = async () => {
+    debugger;
     try {
         let tokenRes = await fetch('https://api.lyft.com/oauth/token', {
             method: 'POST',

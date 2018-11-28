@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { MapView } from 'expo';
 import { lyftAuthToken, lyftCost, lyftNearbyRides } from '../../api/lyft';
 import { connect } from 'react-redux';
+import { getLyftToken } from '../../actions/lyft';
 
 const styles = StyleSheet.create({
     container: {
@@ -37,17 +38,21 @@ class Map extends React.Component {
 
     async componentDidMount() {
 
-        const accessToken = await lyftAuthToken();
-        this.setState({accessToken})
+        if (this.props.authToken.length <= 0) {
+            await this.props.getLyftToken()
+        } 
+        const nearbyRides = await lyftNearbyRides(this.props.authToken, sampleTrip);
+        const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
         debugger;
+        this.setState({normalDrivers})
+
+        // const accessToken = await lyftAuthToken();
+        // this.setState({accessToken})
+        // debugger;
 
         // const prices = await lyftCost(this.state.accessToken, sampleTrip);
         // debugger;
 
-        const nearbyRides = await lyftNearbyRides(this.state.accessToken, sampleTrip);
-        const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
-        debugger;
-        this.setState({normalDrivers})
     }
 
     renderMarkers() {
@@ -58,7 +63,6 @@ class Map extends React.Component {
             
                 this.state.normalDrivers.map((driver, idx) => {
                     <Marker key={idx} title='test' coordinate={{latitude: driver.locations[0].lat, longitude: driver.locations[0].lng}} />
-                    debugger;
                 })
             
         );
@@ -95,7 +99,7 @@ const mapStateToProps = ({ prices, authToken }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-   lyftAuthToken: () => dispatch(yelpSearch(searchInfo))
+   getLyftToken: () => dispatch(getLyftToken())
 });
 
 export default connect(
