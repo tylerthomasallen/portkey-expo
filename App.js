@@ -37,6 +37,7 @@ export default class App extends Component {
       longitude,
       ...deltas
     };
+    debugger;
 
     await this.setState( {region} )
   }

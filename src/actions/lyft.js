@@ -3,7 +3,6 @@ import { lyftAuthToken } from '../api/lyft';
 export const RECEIVE_LYFT_TOKEN = 'RECEIVE_LYFT_TOKEN';
 
 export const receiveLyftToken = authToken => {
-    debugger;
     return {
         type: RECEIVE_LYFT_TOKEN,
         authToken
