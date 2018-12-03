@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     searchButton: {
         margin: 5,
         fontSize: 28,
-        color: '#FF8484'
+        color: '#ff00bf'
 
     },
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     starContainer: {
-        backgroundColor: '#FF8484',
+        backgroundColor: '#ff00bf',
         width: 30,
         height: 30,
         borderRadius: 15,
