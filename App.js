@@ -3,8 +3,7 @@ import { SafeAreaView, View } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './src/store/store';
 import { Location, Permissions } from 'expo';
-
-import Splash from './src/components/splash';
+import Index from './src/components';
 
 const deltas = {
   latitudeDelta: 0.0922,
@@ -37,7 +36,6 @@ export default class App extends Component {
       longitude,
       ...deltas
     };
-    debugger;
 
     await this.setState( {region} )
   }
@@ -46,7 +44,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <Splash />
+          <Index />
         </View>
       </Provider>
     );
