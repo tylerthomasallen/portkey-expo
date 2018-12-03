@@ -193,18 +193,20 @@ class Price extends React.Component {
     }
 }
 
-const mapStateToProps = ({ prices, authToken }) => {
-    return {
-        prices,
-        authToken
-    }
-};
+export default Price;
 
-const mapDispatchToProps = dispatch => ({
-    lyftCost: (authToken) => dispatch(lyftCost(authToken))
-});
+// const mapStateToProps = ({ prices, authToken }) => {
+//     return {
+//         prices,
+//         authToken
+//     }
+// };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Price);
+// const mapDispatchToProps = dispatch => ({
+//     lyftCost: (authToken) => dispatch(lyftCost(authToken))
+// });
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Price);

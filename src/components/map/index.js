@@ -91,18 +91,20 @@ class Map extends React.Component {
     }
 }
 
-const mapStateToProps = ({ prices, authToken }) => {
-    return {
-        prices,
-        authToken
-    }
-};
+export default Map;
 
-const mapDispatchToProps = dispatch => ({
-   getLyftToken: () => dispatch(getLyftToken())
-});
+// const mapStateToProps = ({ prices, authToken }) => {
+//     return {
+//         prices,
+//         authToken
+//     }
+// };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Map);
+// const mapDispatchToProps = dispatch => ({
+//    getLyftToken: () => dispatch(getLyftToken())
+// });
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Map);

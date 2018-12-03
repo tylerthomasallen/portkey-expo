@@ -1,8 +1,24 @@
-import { createStackNavigator } from 'react-navigation';
-import HomeScreen from './home'
+import React from 'react';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import HomeScreen from './home';
+import RouteSearch from './route';
 
-const Index = createStackNavigator({
-    Home: { screen: HomeScreen }
-});
+const AppNavigator = createStackNavigator({
+    Home: HomeScreen,
+    Route: RouteSearch
+    },
+    {
+        initialRouteName: "Home"
+    }
 
-export default Index;
+);
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class Index extends React.Component {
+    render() {
+        return (
+            <AppContainer />
+        )
+    }
+}

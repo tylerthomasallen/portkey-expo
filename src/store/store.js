@@ -1,16 +1,16 @@
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from '../reducers/root_reducer';
-import thunk from 'redux-thunk';
+// import { createStore, applyMiddleware } from 'redux';
+// import rootReducer from '../reducers/root_reducer';
+// import thunk from 'redux-thunk';
 
-const preloadedState = {
-    currentLocation: {}
-};
+// const preloadedState = {
+//     currentLocation: {}
+// };
 
 
-const store = createStore(
-        rootReducer,
-        preloadedState,
-        applyMiddleware(thunk)
-    );
+// const store = createStore(
+//         rootReducer,
+//         preloadedState,
+//         applyMiddleware(thunk)
+//     );
 
-export default store;
+// export default store;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableHighlight, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {
@@ -90,14 +91,12 @@ const styles = StyleSheet.create({
 });
 
 
-class SplashSearch extends React.Component {
+class HomeSearch extends React.Component {
 
-    onPress = () => {
-
-    }
-
-    handlePress = () => {
-        debugger;
+    handlePress() {
+        console.log('hello');
+        const { navigate } = this.props.navigation; 
+        navigate('Route');
     }
 
 
@@ -118,15 +117,15 @@ class SplashSearch extends React.Component {
                         Where are you going?            
                     </Text>
 
-                    <TouchableHighlight onPress={this.handlePress}>
-                        <View style={styles.inputContainer} onPress={this.handlePress}>
+                    <TouchableHighlight onPress={() => this.handlePress()}>
+                        <View style={styles.inputContainer}>
                             <Ionicons name="ios-search" style={styles.searchButton}/>
-                            <TextInput
+                            <View
                                 style={styles.input}
                                 placeholder="Search destination"
                                 placeholderTextColor= 'black'
                         >  
-                            </TextInput>
+                            </View>
                         </View>
                     </TouchableHighlight>
 
@@ -164,4 +163,4 @@ class SplashSearch extends React.Component {
     }
 }
 
-export default SplashSearch;
+export default withNavigation(HomeSearch);
