@@ -5,9 +5,9 @@ import Map from '../map';
 import HomeSearch from './home_search';
 
 class HomeScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Welcome'
-    };
+    // static navigationOptions = {
+    //     title: 'Welcome'
+    // };
 
     render() {
         return (

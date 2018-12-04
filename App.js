@@ -3,6 +3,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './src/components/home'
 import RouteSearch from './src/components/route';
 
+
 const AppNavigator = createStackNavigator({
   Home: HomeScreen,
   Route: RouteSearch

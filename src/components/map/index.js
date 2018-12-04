@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { MapView } from 'expo';
-import { lyftAuthToken, lyftCost, lyftNearbyRides } from '../../api/lyft';
-import { connect } from 'react-redux';
-import { getLyftToken } from '../../actions/lyft';
+import { Location, Permissions } from 'expo';
+
+const deltas = {
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -35,23 +38,38 @@ class Map extends React.Component {
         }
     }
 
+    getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({ errorMessage: 'Location mission access denied' })
+        }
+        const location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+        const region = {
+        latitude,
+        longitude,
+        ...deltas
+        };
+
+        await this.setState( {region} )
+    }
+
 
     async componentDidMount() {
+        // debugger;
+        this.getLocationAsync();
 
-        if (this.props.authToken.length <= 0) {
-            await this.props.getLyftToken()
-        } 
-        const nearbyRides = await lyftNearbyRides(this.props.authToken, sampleTrip);
-        const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
-        debugger;
-        this.setState({normalDrivers})
+        // if (this.state.authToken.length <= 0) {
+        //     await this.props.getLyftToken()
+        // } 
+        // const nearbyRides = await lyftNearbyRides(this.props.authToken, sampleTrip);
+        // const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
+        // this.setState({normalDrivers})
 
         // const accessToken = await lyftAuthToken();
         // this.setState({accessToken})
-        // debugger;
 
         // const prices = await lyftCost(this.state.accessToken, sampleTrip);
-        // debugger;
 
     }
 
@@ -70,23 +88,27 @@ class Map extends React.Component {
 
     render() {
         const Marker = MapView.Marker
+        
         return (
-            <MapView 
-            style={styles.container}
-            region={region}
-            showsUserLocation
-            showsMyLocationButton
-            // followsUserLocation
-            provider={'google'}
-            >
+            <View style={{flex: 2}}>
+            <Text>Hello World</Text>
+           
+                <MapView 
+                style={styles.container}
+                region={region}
+                showsUserLocation
+                showsMyLocationButton
+                followsUserLocation
+                provider={'google'}
+                >
 
-            {this.state.normalDrivers.map((driver, idx) => {
-                return <Marker key={idx} title='test' image={require('./car.png')} coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
-            })}
+                {this.state.normalDrivers.map((driver, idx) => {
+                    return <Marker key={idx} title='test' image={require('./car.png')} coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
+                })}
 
-            {/* {this.renderMarkers()} */}
 
-            </MapView>
+                </MapView>
+                 </View >
         );
     }
 }

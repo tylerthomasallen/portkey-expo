@@ -132,17 +132,17 @@ class Price extends React.Component {
     }
 
     async componentDidMount() {
-        const prices = await lyftCost(this.props.authToken, sampleTrip);
-        const estimatedPriceCents = prices.cost_estimates[0].estimated_cost_cents_min;
-        const dollars = estimatedPriceCents / 100;
-        let cents = estimatedPriceCents % 100;
+        // const prices = await lyftCost(this.props.authToken, sampleTrip);
+        // const estimatedPriceCents = prices.cost_estimates[0].estimated_cost_cents_min;
+        // const dollars = estimatedPriceCents / 100;
+        // let cents = estimatedPriceCents % 100;
 
-        if (cents < 10) {
-            cents = `0${cents}`
-        }
+        // if (cents < 10) {
+        //     cents = `0${cents}`
+        // }
 
-        this.setState({lyftPrice: `$${dollars}.${cents}`})
-        debugger;
+        // this.setState({lyftPrice: `$${dollars}.${cents}`})
+        // debugger;
     }
 
     render() {
