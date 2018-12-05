@@ -120,12 +120,13 @@ class HomeSearch extends React.Component {
                     <TouchableHighlight onPress={() => this.handlePress()}>
                         <View style={styles.inputContainer}>
                             <Ionicons name="ios-search" style={styles.searchButton}/>
-                            <View
+                            <TextInput
                                 style={styles.input}
                                 placeholder="Search destination"
                                 placeholderTextColor= 'black'
+                                pointerEvents="none"
                         >  
-                            </View>
+                            </TextInput>
                         </View>
                     </TouchableHighlight>
 
