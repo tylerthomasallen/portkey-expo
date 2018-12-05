@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     container: {
@@ -60,6 +61,11 @@ class RouteSearch extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log('hello');
+        debugger;
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -87,4 +93,36 @@ class RouteSearch extends React.Component {
     }
 }
 
-export default RouteSearch;
+const mapStateToProps = ({ origin, destination }) => {
+    return {
+        origin,
+        destination
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    getGoogleLoc: () => dispatch(getGoogleLoc())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RouteSearch)
+
+// export default RouteSearch;
+
+// const mapStateToProps = ({ prices, authToken }) => {
+//     return {
+//         prices,
+//         authToken
+//     }
+// };
+
+// const mapDispatchToProps = dispatch => ({
+//     getLyftToken: () => dispatch(getLyftToken())
+// });
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Map);

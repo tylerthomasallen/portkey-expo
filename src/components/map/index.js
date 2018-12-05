@@ -59,7 +59,6 @@ class Map extends React.Component {
     async componentDidMount() {
         // debugger;
         this.getLocationAsync();
-        debugger;
 
         // if (this.state.authToken.length <= 0) {
         //     await this.props.getLyftToken()
