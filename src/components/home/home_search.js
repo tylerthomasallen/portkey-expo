@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
 class HomeSearch extends React.Component {
 
     handlePress() {
-        console.log('hello');
         const { navigate } = this.props.navigation; 
         navigate('Route');
     }

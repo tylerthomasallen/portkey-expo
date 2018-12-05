@@ -103,7 +103,6 @@ class RouteSearch extends React.Component {
     }
 
     componentDidMount() {
-        console.log('hello');
     }
 
     handleInput = (text, type) => {

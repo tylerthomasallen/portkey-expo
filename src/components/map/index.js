@@ -1,13 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { MapView } from 'expo';
-import { Location, Permissions } from 'expo';
 import { connect } from 'react-redux';
-
-const deltas = {
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421
-}
+import { setCurrentLocation } from '../../actions/google';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,50 +10,29 @@ const styles = StyleSheet.create({
     }
 });
 
-const region = {
-    latitude: 37.754090,
-    longitude: -122.413934,
-    latitudeDelta: 0.03,
-    longitudeDelta: 0.01
-};
-
-const sampleTrip = {
-    endLat: 37.793108,
-    endLng: -122.432374,
-    startLat: region.latitude,
-    startLng: region.longitude
-}
-
 class Map extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            accessToken: '',
-            normalDrivers: []
+            normalDrivers: [],
+            region: {}
         }
     }
 
-    getLocationAsync = async () => {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
-            this.setState({ errorMessage: 'Location mission access denied' })
-        }
-        const location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
-        const region = {
-        latitude,
-        longitude,
-        ...deltas
-        };
-
-        await this.setState( {region} )
+    updateOrigin = async (location) => {
+        const { receiveCurrentLocation } = this.props;
+        await receiveCurrentLocation(location)
     }
 
 
-    async componentDidMount() {
+    async componentWillMount() {
+        await this.props.setCurrentLocation();
+        debugger;
+        // console.log(this.props.currentLocation)
+        // await this.getLocationAsync()
         // debugger;
-        this.getLocationAsync();
+        // this.getLocationAsync();
 
         // if (this.state.authToken.length <= 0) {
         //     await this.props.getLyftToken()
@@ -94,11 +68,12 @@ class Map extends React.Component {
            
                 <MapView 
                 style={styles.container}
-                region={region}
+                region={this.props.currentLocation}
                 showsUserLocation
                 showsMyLocationButton
                 followsUserLocation
                 provider={'google'}
+                onUserLocationChange={() => console.log('hello')}
                 >
 
                 {this.state.normalDrivers.map((driver, idx) => {
@@ -111,17 +86,15 @@ class Map extends React.Component {
     }
 }
 
-// export default Map;
-
-const mapStateToProps = ({ prices, authToken }) => {
+const mapStateToProps = ({ currentLocation }) => {
     return {
-        prices,
-        authToken
+        currentLocation
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-   getLyftToken: () => dispatch(getLyftToken())
+   getLyftToken: () => dispatch(getLyftToken()),
+   setCurrentLocation: () => dispatch(setCurrentLocation())
 });
 
 export default connect(
