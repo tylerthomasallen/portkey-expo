@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { MapView } from 'expo';
 import { Location, Permissions } from 'expo';
+import { connect } from 'react-redux';
 
 const deltas = {
   latitudeDelta: 0.0922,
@@ -58,6 +59,7 @@ class Map extends React.Component {
     async componentDidMount() {
         // debugger;
         this.getLocationAsync();
+        debugger;
 
         // if (this.state.authToken.length <= 0) {
         //     await this.props.getLyftToken()
@@ -90,8 +92,6 @@ class Map extends React.Component {
         const Marker = MapView.Marker
         
         return (
-            <View style={{flex: 2}}>
-            <Text>Hello World</Text>
            
                 <MapView 
                 style={styles.container}
@@ -108,25 +108,24 @@ class Map extends React.Component {
 
 
                 </MapView>
-                 </View >
         );
     }
 }
 
-export default Map;
+// export default Map;
 
-// const mapStateToProps = ({ prices, authToken }) => {
-//     return {
-//         prices,
-//         authToken
-//     }
-// };
+const mapStateToProps = ({ prices, authToken }) => {
+    return {
+        prices,
+        authToken
+    }
+};
 
-// const mapDispatchToProps = dispatch => ({
-//    getLyftToken: () => dispatch(getLyftToken())
-// });
+const mapDispatchToProps = dispatch => ({
+   getLyftToken: () => dispatch(getLyftToken())
+});
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Map);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Map);
