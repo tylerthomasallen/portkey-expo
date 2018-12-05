@@ -1,54 +1,94 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import SearchResult from './search_result';
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
+        flex: 1,
+        marginTop: 5,
+        marginBottom: 10
+    },
+
+    upperContainer: {
         margin: 10,
-        flex: 1
+        marginBottom: 5
+    },
+
+    greeting: {
+        fontSize: 16,
     },
 
     title: {
-        textAlign: 'center',
         fontSize: 20,
         fontWeight: 'bold'
     },
 
-    searchContainer: {
+    inputContainer: {
         borderColor: '#BDBDBD',
         borderWidth: .5,
         borderRadius: 10,
         padding: 10,
-        display: 'flex',
-        flexDirection: 'column'
-    },
-
-    inputContainer: {
-        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center'
+        marginTop: 5,
+        marginBottom: 0
     },
 
-    start: {
-        color: 'blue',
-        marginRight: 5,
-        marginLeft: 5
-    },
+    searchButton: {
+        margin: 5,
+        fontSize: 28,
+        color: '#ff00bf'
 
-    end: {
-        color: 'red',
-        marginRight: 5,
-        marginLeft: 5
     },
 
     input: {
-        borderBottomColor: '#BDBDBD',
-        borderBottomWidth: .5,
-        padding: 10,
-        width: '100%'
+        shadowOpacity: 0,
+        shadowColor: 'white',
+        margin: 5,
+        fontSize: 20
+    },
+
+    addressContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
+        paddingBottom: 10
+
+    },
+
+    starContainer: {
+        backgroundColor: '#ff00bf',
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10
+    },
+
+    star: {
+        color: 'white',
+        fontSize: 24
+    },
+
+    address: {
+        flexDirection: 'column'
+    },
+
+    addressTitle: {
+        fontWeight: '500'
+    },
+
+    streetAddress: {
+        color: '#BDBDBD'
     }
-})
+
+
+
+});
 
 
 class RouteSearch extends React.Component {
@@ -56,40 +96,59 @@ class RouteSearch extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: 'Pickup',
-            start: '',
-            end: ''
+            title: 'Where are you going?',
+            origin: '',
+            destination: ''
         }
     }
 
     componentDidMount() {
         console.log('hello');
-        debugger;
+    }
+
+    handleInput = (text, type) => {
+        this.setState({[type]: text})
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{this.state.title}</Text>
 
-                <View style={styles.searchContainer}>
+            <View style={
+                styles.container
+            }>
+
+                <View style={styles.upperContainer}>
+
+                    <Text style={styles.title}>
+                        {this.state.title}
+                    </Text>
+
                     <View style={styles.inputContainer}>
-                        <Text style={styles.start}>Start</Text>
-                        <TextInput 
-                            placeholder="Search pickup spot"
-                            style={styles.input}
-                        />
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.end}>End</Text>
+                        <Text style={styles.searchButton}>Start</Text>
                         <TextInput
-                            placeholder="Search destination"
                             style={styles.input}
-                        />
+                            placeholder="Search pickup spot"
+                            placeholderTextColor='black'
+                            onChangeText={(text) => this.handleInput(text, 'origin')}
+                            value={this.state.origin}
+                        >
+                        </TextInput>
                     </View>
-                </View>
 
-                <SearchResult />
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.searchButton}>End</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Search destination"
+                            placeholderTextColor='black'
+                            onChangeText={(text) => this.handleInput(text, 'destination')}
+                            value={this.state.destination}
+                        >
+                        </TextInput>
+                    </View>
+
+
+                </View>
             </View>
         )
     }
