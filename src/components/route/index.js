@@ -108,6 +108,7 @@ class RouteSearch extends React.Component {
 
     handleInput = (text, type) => {
         this.setState({[type]: text})
+        // type === 'origin' ? this.setState({title: 'Pickup'}) : this.setState({title: 'Dropoff'})
     }
 
     render() {
@@ -130,6 +131,7 @@ class RouteSearch extends React.Component {
                             placeholder="Search pickup spot"
                             placeholderTextColor='black'
                             onChangeText={(text) => this.handleInput(text, 'origin')}
+                            onTouchStart={() => this.setState({title: 'Pickup'})}
                             value={this.state.origin}
                         >
                         </TextInput>
@@ -142,6 +144,7 @@ class RouteSearch extends React.Component {
                             placeholder="Search destination"
                             placeholderTextColor='black'
                             onChangeText={(text) => this.handleInput(text, 'destination')}
+                            onTouchStart={() => this.setState({ title: 'Dropoff' })}
                             value={this.state.destination}
                         >
                         </TextInput>
