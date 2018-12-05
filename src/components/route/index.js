@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 5
     },
 
     inputContainer: {
@@ -30,7 +32,9 @@ const styles = StyleSheet.create({
         borderWidth: .5,
         borderRadius: 10,
         padding: 10,
+        display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'space-between',
         marginTop: 5,
         marginBottom: 0
     },
@@ -46,7 +50,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0,
         shadowColor: 'white',
         margin: 5,
-        fontSize: 20
+        fontSize: 20,
+        width: '75%'
     },
 
     addressContainer: {
