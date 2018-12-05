@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 10
     },
 
     inputContainer: {
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         flexDirection: 'row',
-        marginTop: 10,
         marginBottom: 0
     },
 
@@ -117,7 +117,7 @@ class HomeSearch extends React.Component {
                         Where are you going?            
                     </Text>
 
-                    <TouchableHighlight onPress={() => this.handlePress()}>
+                    <TouchableHighlight onPress={() => this.handlePress()} underlayColor='white'>
                         <View style={styles.inputContainer}>
                             <Ionicons name="ios-search" style={styles.searchButton}/>
                             <TextInput
