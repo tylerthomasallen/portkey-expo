@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import SearchResult from './search_result';
 
 const styles = StyleSheet.create({
     container: {
@@ -88,6 +89,7 @@ class RouteSearch extends React.Component {
                     </View>
                 </View>
 
+                <SearchResult />
             </View>
         )
     }
@@ -108,21 +110,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(RouteSearch)
-
-// export default RouteSearch;
-
-// const mapStateToProps = ({ prices, authToken }) => {
-//     return {
-//         prices,
-//         authToken
-//     }
-// };
-
-// const mapDispatchToProps = dispatch => ({
-//     getLyftToken: () => dispatch(getLyftToken())
-// });
-
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Map);
