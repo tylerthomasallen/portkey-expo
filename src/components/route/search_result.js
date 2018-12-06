@@ -99,15 +99,18 @@ class SearchResult extends React.Component {
 
         debugger;
         return (
-            <View style={styles.addressContainer}>
-                <View style={styles.starContainer}>
-                    <Ionicons name="ios-star" style={styles.star} />
+            <TouchableHighlight>
+
+                <View style={styles.addressContainer}>
+                    <View style={styles.starContainer}>
+                        <Ionicons name="ios-star" style={styles.star} />
+                    </View>
+                    <View styles={styles.address}>
+                        <Text style={styles.addressTitle}>{description}</Text>
+                        <Text style={styles.streetAddress}>{streetAddress}</Text>
+                    </View>
                 </View>
-                <View styles={styles.address}>
-                    <Text style={styles.addressTitle}>{description}</Text>
-                    <Text style={styles.streetAddress}>{streetAddress}</Text>
-                </View>
-            </View>
+            </TouchableHighlight>
         )
     }
 
