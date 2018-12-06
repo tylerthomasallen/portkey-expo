@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import SearchResult from './search_result';
+import { googlePlaces } from '../../api/google';
+
+const GOOGLE_PLACES_API_KEY = 'AIzaSyBwf8koig1eA-aer5qBvPNhuBCz6V11E5A'
 
 const styles = StyleSheet.create({
     container: {
@@ -104,16 +107,26 @@ class RouteSearch extends React.Component {
             title: 'Where are you going?',
             origin: '',
             destination: '',
-            results: [{title: 'Current Location'}]
+            results: []
         }
     }
 
     componentDidMount() {
     }
 
-    handleInput = (text, type) => {
+    handleInput = async (text, type) => {
         this.setState({[type]: text})
-        // type === 'origin' ? this.setState({title: 'Pickup'}) : this.setState({title: 'Dropoff'})
+
+        if (text.length >= 2) {
+           const googleResponse = await googlePlaces(text)
+           debugger;
+           this.setState({results: googleResponse})
+        }
+
+        if (text.length <= 1) {
+            this.setState({results: []})
+        }
+
     }
 
     render() {
@@ -136,7 +149,7 @@ class RouteSearch extends React.Component {
                             placeholder="Search pickup spot"
                             placeholderTextColor='black'
                             onChangeText={(text) => this.handleInput(text, 'origin')}
-                            onTouchStart={() => this.setState({title: 'Pickup'})}
+                            onTouchStart={() => this.setState({title: 'Pickup', results: []})}
                             value={this.state.origin}
                         >
                         </TextInput>
@@ -149,7 +162,7 @@ class RouteSearch extends React.Component {
                             placeholder="Search destination"
                             placeholderTextColor='black'
                             onChangeText={(text) => this.handleInput(text, 'destination')}
-                            onTouchStart={() => this.setState({ title: 'Dropoff' })}
+                            onTouchStart={() => this.setState({ title: 'Dropoff', results: []})}
                             value={this.state.destination}
                         >
                         </TextInput>
@@ -158,8 +171,24 @@ class RouteSearch extends React.Component {
 
                 </View>
 
+                {/* <GooglePlacesAutocomplete
+                    placeholder='Search'
+                    minLength={2}
+                    listViewDisplayed='auto'
+                    fetchDetails={true}
+                    onPress={(data) => console.log(data)}
+                    query={{
+                        key: GOOGLE_PLACES_API_KEY
+                    }}
+                    currentLocation={true}
+                    currentLocationLabel="Current Location"
+                    debounce={200}
+                    style={styles.inputContainer}
+
+                /> */}
+
                 {this.state.results.map((location, idx) => {
-                    return <SearchResult key={idx} location={location}/>
+                     return <SearchResult key={idx} description={location.description}/>
                 })}
             </View>
         )
