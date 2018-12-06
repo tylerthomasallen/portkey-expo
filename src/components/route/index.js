@@ -188,7 +188,11 @@ class RouteSearch extends React.Component {
                 /> */}
 
                 {this.state.results.map((location, idx) => {
-                     return <SearchResult key={idx} description={location.description}/>
+                     return (
+                         <TouchableHighlight>
+                             <SearchResult key={idx} description={location.description}/>
+                         </TouchableHighlight>
+                     )
                 })}
             </View>
         )
