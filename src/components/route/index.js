@@ -103,7 +103,8 @@ class RouteSearch extends React.Component {
         this.state = {
             title: 'Where are you going?',
             origin: '',
-            destination: ''
+            destination: '',
+            results: [{title: 'Current Location'}]
         }
     }
 
@@ -156,15 +157,24 @@ class RouteSearch extends React.Component {
 
 
                 </View>
+
+                {this.state.results.map((location, idx) => {
+                    return <SearchResult key={idx} location={location}/>
+                })}
             </View>
         )
     }
 }
 
-const mapStateToProps = ({ origin, destination }) => {
+// this.state.normalDrivers.map((driver, idx) => {
+//     <Marker key={idx} title='test' coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
+// })
+
+const mapStateToProps = ({ origin, destination, currentLocation }) => {
     return {
         origin,
-        destination
+        destination,
+        currentLocation
     }
 }
 

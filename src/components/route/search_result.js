@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
 class SearchResult extends React.Component {
 
     render() {
+        const { location } = this.props;
         return (
             <TouchableHighlight style={styles.touchable} onPress={this.onPress}>
                 <View style={styles.addressContainer}>
@@ -98,8 +99,8 @@ class SearchResult extends React.Component {
                         <Ionicons name="ios-star" style={styles.star} />
                     </View>
                     <View styles={styles.address}>
-                        <Text style={styles.addressTitle}>Tyler's Place</Text>
-                        <Text style={styles.streetAddress}>2713 Folsom St, San Francisco</Text>
+                        <Text style={styles.addressTitle}>{location.title}</Text>
+                        <Text style={styles.streetAddress}>{location.address}</Text>
                     </View>
                 </View>
             </TouchableHighlight>

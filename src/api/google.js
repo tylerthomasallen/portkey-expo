@@ -1,9 +1,6 @@
 import { Location, Permissions } from 'expo';
 
-const deltas = {
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
-}
+const GOOGLE_PLACES_API_KEY = 'AIzaSyBwf8koig1eA-aer5qBvPNhuBCz6V11E5A'
 
 export const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -15,9 +12,27 @@ export const getLocation = async () => {
     const { latitude, longitude } = location.coords;
     const region = {
         latitude,
-        longitude,
-        ...deltas
+        longitude
     };
 
     return region;
 }
+
+export const googlePlaces = async (location) => {
+    try {
+        let placesResponse = await fetch(
+            'https://maps.googleapis.com/maps/api/place/autocomplete', {
+                method: 'GET',
+                body: JSON.stringify({
+                    input: '271',
+                    key: GOOGLE_PLACES_API_KEY,
+                    location
+                })
+            }
+        )
+        let placesJSON = await placesResponse.json();
+        debugger;
+    } catch (error) {
+        console.log(error)
+    }
+};

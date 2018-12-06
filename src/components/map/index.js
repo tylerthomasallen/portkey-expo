@@ -4,6 +4,11 @@ import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { setCurrentLocation } from '../../actions/google';
 
+const deltas = {
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 2
@@ -28,7 +33,6 @@ class Map extends React.Component {
 
     async componentWillMount() {
         await this.props.setCurrentLocation();
-        debugger;
         // console.log(this.props.currentLocation)
         // await this.getLocationAsync()
         // debugger;
@@ -63,12 +67,13 @@ class Map extends React.Component {
 
     render() {
         const Marker = MapView.Marker
+        const { currentLocation } = this.props
         
         return (
            
                 <MapView 
                 style={styles.container}
-                region={this.props.currentLocation}
+                region={{...currentLocation, ...deltas}}
                 showsUserLocation
                 showsMyLocationButton
                 followsUserLocation
