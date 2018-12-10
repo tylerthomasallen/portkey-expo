@@ -78,7 +78,7 @@ class Map extends React.Component {
                 showsMyLocationButton
                 followsUserLocation
                 provider={'google'}
-                onUserLocationChange={() => console.log('hello')}
+                // onUserLocationChange
                 >
 
                 {this.state.normalDrivers.map((driver, idx) => {

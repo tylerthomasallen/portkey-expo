@@ -90,6 +90,10 @@ const styles = StyleSheet.create({
 
 class SearchResult extends React.Component {
 
+    onPress = (description) => {
+        console.log(description);
+    }
+
     render() {
         const { description } = this.props;
         const arr = description.split(', ');
@@ -97,10 +101,8 @@ class SearchResult extends React.Component {
         const city = arr[arr.length -3]
         const streetAddress = city + ', ' + state;
 
-        debugger;
         return (
-            <TouchableHighlight>
-
+            <TouchableHighlight onPress={() => this.onPress(description)}>
                 <View style={styles.addressContainer}>
                     <View style={styles.starContainer}>
                         <Ionicons name="ios-star" style={styles.star} />

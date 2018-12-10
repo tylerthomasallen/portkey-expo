@@ -135,13 +135,15 @@ class RouteSearch extends React.Component {
     }
 
     handlePress = (location) => {
-        const { title, origin, destination } = this.state;
-        debugger;
-        title === 'Pickup' ? this.setState({origin: location, results: []}) : this.setState({destination: location, results: []})
 
-        if (origin.length >= 1 && destination.length >= 1) {
-            navigate('Home');
-        }
+        console.log(location);
+        // const { title, origin, destination } = this.state;
+        // debugger;
+        // title === 'Pickup' ? this.setState({origin: location, results: []}) : this.setState({destination: location, results: []})
+
+        // if (origin.length >= 1 && destination.length >= 1) {
+        //     navigate('Home');
+        // }
 
     }
 
@@ -206,7 +208,9 @@ class RouteSearch extends React.Component {
                 <View style={styles.resultsContainer}>
                     {this.state.results.map((location, idx) => {
                         return (
-                            <SearchResult key={idx} description={location.description}/>
+                            <TouchableHighlight key={idx + 1} onPress={() => this.handlePress(location.description)}>
+                                <SearchResult key={idx} description={location.description}/>
+                            </TouchableHighlight>
                         )
                     })}
                 </View>
