@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { MapView } from 'expo';
+import  MapView  from 'react-native-maps';
 import { connect } from 'react-redux';
 import { setCurrentLocation } from '../../actions/google';
+import { getLyftToken } from '../../actions/lyft';
+import { lyftNearbyRides } from '../../api/lyft';
+import MapViewDirections from 'react-native-maps-directions';
+
+import { GOOGLE_DIRECTIONS_API_KEY } from '../../constants/keys';
 
 const deltas = {
     latitudeDelta: 0.0922,
@@ -25,25 +30,23 @@ class Map extends React.Component {
         }
     }
 
-    updateOrigin = async (location) => {
-        const { receiveCurrentLocation } = this.props;
-        await receiveCurrentLocation(location)
-    }
+    // updateOrigin = async (location) => {
+    //     const { receiveCurrentLocation } = this.props;
+    //     await receiveCurrentLocation(location)
+    // }
 
 
     async componentWillMount() {
         await this.props.setCurrentLocation();
-        // console.log(this.props.currentLocation)
-        // await this.getLocationAsync()
-        // debugger;
-        // this.getLocationAsync();
+        
+        if (this.props.authToken.length <= 0) {
+            await this.props.getLyftToken()
+        }
+        const { authToken, currentLocation } = this.props;
 
-        // if (this.state.authToken.length <= 0) {
-        //     await this.props.getLyftToken()
-        // } 
-        // const nearbyRides = await lyftNearbyRides(this.props.authToken, sampleTrip);
-        // const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
-        // this.setState({normalDrivers})
+        const nearbyRides = await lyftNearbyRides(authToken, currentLocation);
+        const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
+        this.setState({normalDrivers})
 
         // const accessToken = await lyftAuthToken();
         // this.setState({accessToken})
@@ -52,18 +55,24 @@ class Map extends React.Component {
 
     }
 
-    renderMarkers() {
-        const Marker = MapView.Marker
-        return (
-            // <Marker title='test' coordinate={{ latitude: 37.761867, longitude: -122.421671}} />
+    showDirections = () => {
+        const { origin, destination } = this.props;
 
-            
-                this.state.normalDrivers.map((driver, idx) => {
-                    <Marker key={idx} title='test' coordinate={{latitude: driver.locations[0].lat, longitude: driver.locations[0].lng}} />
-                })
-            
-        );
+        if (origin.length >= 1 && destination.length >= 1) {
+            debugger;
+            return (
+                <MapViewDirections 
+                origin={origin}
+                destination={destination}
+                apikey={GOOGLE_DIRECTIONS_API_KEY}
+                strokeWidth={5}
+                strokeColor="hotpink"
+                />
+            )
+        }
     }
+
+
 
     render() {
         const Marker = MapView.Marker
@@ -85,15 +94,20 @@ class Map extends React.Component {
                     return <Marker key={idx} title='test' image={require('./car.png')} coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
                 })}
 
+                {this.showDirections()}
+
 
                 </MapView>
         );
     }
 }
 
-const mapStateToProps = ({ currentLocation }) => {
+const mapStateToProps = ({ authToken, currentLocation, origin, destination }) => {
     return {
-        currentLocation
+        authToken,
+        currentLocation,
+        origin,
+        destination
     }
 };
 

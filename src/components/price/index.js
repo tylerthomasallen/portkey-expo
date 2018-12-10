@@ -105,8 +105,6 @@ const region = {
     longitude: -122.413934,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421
-    // latitudeDelta: 0.03,
-    // longitudeDelta: 0.01
 };
 
 const sampleTrip = {
@@ -193,20 +191,18 @@ class Price extends React.Component {
     }
 }
 
-export default Price;
+const mapStateToProps = ({ origin, destination }) => {
+    return {
+        origin,
+        destination
+    }
+};
 
-// const mapStateToProps = ({ prices, authToken }) => {
-//     return {
-//         prices,
-//         authToken
-//     }
-// };
+const mapDispatchToProps = dispatch => ({
+    lyftCost: (authToken) => dispatch(lyftCost(authToken))
+});
 
-// const mapDispatchToProps = dispatch => ({
-//     lyftCost: (authToken) => dispatch(lyftCost(authToken))
-// });
-
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Price);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Price);

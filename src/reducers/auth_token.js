@@ -4,7 +4,7 @@ const authTokenReducer = (state = '', action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_LYFT_TOKEN:
-            return action.authToken;
+            return action.payload;
         default:
             return state;
     }
