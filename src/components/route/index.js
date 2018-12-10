@@ -5,6 +5,8 @@ import SearchResult from './search_result';
 import { googlePlaces } from '../../api/google';
 import { withNavigation } from 'react-navigation';
 
+import { setOrigin, setDestination } from '../../actions/route';
+
 const GOOGLE_PLACES_API_KEY = 'AIzaSyBwf8koig1eA-aer5qBvPNhuBCz6V11E5A'
 
 const styles = StyleSheet.create({
@@ -131,23 +133,17 @@ class RouteSearch extends React.Component {
     }
 
     handlePress = (location) => {
-
-        console.log(location);
         const { title } = this.state;
-        // debugger;
+        const { setOrigin, setDestination } = this.props;
 
         if (title === 'Pickup') {
-            this.setState({ localOrigin: location, results: [] })  
+            this.setState({ localOrigin: location, results: [] })
+            setOrigin(location)
+
         } else {
             this.setState({ localDestination: location, results: [] })
+            setDestination(location)
         }
-        // title === 'Pickup' ? this.setState({localOrigin: location, results: []}) : this.setState({localDestination: location, results: []})
-        // debugger;
-
-        // if (origin.length >= 1 && destination.length >= 1) {
-        //     navigate('Home');
-        // }
-
     }
 
     textInputValue = (type) => {
@@ -240,7 +236,9 @@ const mapStateToProps = ({ origin, destination, currentLocation }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    getGoogleLoc: () => dispatch(getGoogleLoc())
+    getGoogleLoc: () => dispatch(getGoogleLoc()),
+    setOrigin: (location) => dispatch(setOrigin(location)),
+    setDestination: (location) => dispatch(setDestination(location))
 });
 
 export default connect(
