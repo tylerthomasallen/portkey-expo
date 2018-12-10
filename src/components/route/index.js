@@ -133,8 +133,9 @@ class RouteSearch extends React.Component {
     }
 
     handlePress = (location) => {
-        const { title } = this.state;
+        const { title, localOrigin, localDestination } = this.state;
         const { setOrigin, setDestination } = this.props;
+        const { navigate } = this.props.navigation; 
 
         if (title === 'Pickup') {
             this.setState({ localOrigin: location, results: [] })
@@ -143,6 +144,10 @@ class RouteSearch extends React.Component {
         } else {
             this.setState({ localDestination: location, results: [] })
             setDestination(location)
+        }
+
+        if (localOrigin.length >= 1 && localDestination.length >= 1) {
+            navigate('Home')
         }
     }
 
@@ -192,22 +197,6 @@ class RouteSearch extends React.Component {
 
                 </View>
 
-                {/* <GooglePlacesAutocomplete
-                    placeholder='Search'
-                    minLength={2}
-                    listViewDisplayed='auto'
-                    fetchDetails={true}
-                    onPress={(data) => console.log(data)}
-                    query={{
-                        key: GOOGLE_PLACES_API_KEY
-                    }}
-                    currentLocation={true}
-                    currentLocationLabel="Current Location"
-                    debounce={200}
-                    style={styles.inputContainer}
-
-                /> */}
-
                 <View style={styles.resultsContainer}>
                     {this.state.results.map((location, idx) => {
                         return (
@@ -241,7 +230,7 @@ const mapDispatchToProps = dispatch => ({
     setDestination: (location) => dispatch(setDestination(location))
 });
 
-export default connect(
+export default withNavigation(connect(
     mapStateToProps,
     mapDispatchToProps
-)(RouteSearch)
+)(RouteSearch))
