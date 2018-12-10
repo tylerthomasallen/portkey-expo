@@ -110,13 +110,10 @@ class RouteSearch extends React.Component {
         super(props)
         this.state = {
             title: 'Where are you going?',
-            origin: '',
-            destination: '',
+            localOrigin: '',
+            localDestination: '',
             results: []
         }
-    }
-
-    componentDidMount() {
     }
 
     handleInput = async (text, type) => {
@@ -124,7 +121,6 @@ class RouteSearch extends React.Component {
 
         if (text.length >= 2) {
            const googleResponse = await googlePlaces(text)
-           debugger;
            this.setState({results: googleResponse})
         }
 
@@ -137,14 +133,25 @@ class RouteSearch extends React.Component {
     handlePress = (location) => {
 
         console.log(location);
-        // const { title, origin, destination } = this.state;
+        const { title } = this.state;
         // debugger;
-        // title === 'Pickup' ? this.setState({origin: location, results: []}) : this.setState({destination: location, results: []})
+
+        if (title === 'Pickup') {
+            this.setState({ localOrigin: location, results: [] })  
+        } else {
+            this.setState({ localDestination: location, results: [] })
+        }
+        // title === 'Pickup' ? this.setState({localOrigin: location, results: []}) : this.setState({localDestination: location, results: []})
+        // debugger;
 
         // if (origin.length >= 1 && destination.length >= 1) {
         //     navigate('Home');
         // }
 
+    }
+
+    textInputValue = (type) => {
+        return this.state.type;
     }
 
     render() {
@@ -166,9 +173,9 @@ class RouteSearch extends React.Component {
                             style={styles.input}
                             placeholder="Search pickup spot"
                             placeholderTextColor='black'
-                            onChangeText={(text) => this.handleInput(text, 'origin')}
-                            onTouchStart={() => this.setState({title: 'Pickup', results: [], origin: ''})}
-                            value={this.state.origin}
+                            onChangeText={(text) => this.handleInput(text, 'localOrigin')}
+                            onTouchStart={() => this.setState({title: 'Pickup', results: [], localOrigin: ''})}
+                            value={this.state.localOrigin}
                         >
                         </TextInput>
                     </View>
@@ -179,9 +186,9 @@ class RouteSearch extends React.Component {
                             style={styles.input}
                             placeholder="Search destination"
                             placeholderTextColor='black'
-                            onChangeText={(text) => this.handleInput(text, 'destination')}
-                            onTouchStart={() => this.setState({ title: 'Dropoff', results: [], destination: ''})}
-                            value={this.state.destination}
+                            onChangeText={(text) => this.handleInput(text, 'localDestination')}
+                            onTouchStart={() => this.setState({ title: 'Dropoff', results: [], localDestination: ''})}
+                            value={this.state.localDestination}
                         >
                         </TextInput>
                     </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
@@ -90,10 +90,6 @@ const styles = StyleSheet.create({
 
 class SearchResult extends React.Component {
 
-    onPress = (description) => {
-        console.log(description);
-    }
-
     render() {
         const { description } = this.props;
         const arr = description.split(', ');
@@ -102,17 +98,15 @@ class SearchResult extends React.Component {
         const streetAddress = city + ', ' + state;
 
         return (
-            <TouchableHighlight onPress={() => this.onPress(description)}>
-                <View style={styles.addressContainer}>
-                    <View style={styles.starContainer}>
-                        <Ionicons name="ios-star" style={styles.star} />
-                    </View>
-                    <View styles={styles.address}>
-                        <Text style={styles.addressTitle}>{description}</Text>
-                        <Text style={styles.streetAddress}>{streetAddress}</Text>
-                    </View>
+            <View style={styles.addressContainer}>
+                <View style={styles.starContainer}>
+                    <Ionicons name="ios-star" style={styles.star} />
                 </View>
-            </TouchableHighlight>
+                <View styles={styles.address}>
+                    <Text style={styles.addressTitle}>{description}</Text>
+                    <Text style={styles.streetAddress}>{streetAddress}</Text>
+                </View>
+            </View>
         )
     }
 
