@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { lyftCost } from '../../api/lyft';
 import { Ionicons } from '@expo/vector-icons';
+
+import { LYFT_CLIENT_ID } from '../../constants/keys';
 
 const styles = StyleSheet.create({
     container: {
@@ -125,8 +127,9 @@ class Price extends React.Component {
         }
     }
 
-    getPrices() {
-
+    linkToLyft = () => {
+        const { origin, destination } = this.props;
+        Linking.openURL(`https://lyft.com/ride?id=lyft&pickup[latitude]=${origin.lat}&pickup[longitude]=${origin.lng}&partner=${LYFT_CLIENT_ID}&destination[latitude]=${destination.lat}&destination[longitude]=${destination.lng}`)
     }
 
     convertPriceFromCents = (price) => {
@@ -167,22 +170,25 @@ class Price extends React.Component {
                     Affordable rides, all to yourself :)
                 </Text>
 
-                <View style={styles.lyftPriceContainer}>
-                    <View style={styles.leftSide}>
-                        <Ionicons name="ios-car" style={styles.lyftCar} />
-                        <View style={styles.carTypeTitleContainer}>
-                            <Text style={styles.carTypeTitle}>Lyft Line</Text>
-                            <View style={styles.personContainer}>
-                                <Ionicons name="ios-person" style={styles.person} />
-                                <Text style={{fontSize: 12}}>1-2</Text>
+                <TouchableHighlight onPress={() => this.linkToLyft()} underlayColor='white'>
+                    <View style={styles.lyftPriceContainer}>
+                        <View style={styles.leftSide}>
+                            <Ionicons name="ios-car" style={styles.lyftCar} />
+                            <View style={styles.carTypeTitleContainer}>
+                                <Text style={styles.carTypeTitle}>Lyft Line</Text>
+                                <View style={styles.personContainer}>
+                                    <Ionicons name="ios-person" style={styles.person} />
+                                    <Text style={{fontSize: 12}}>1-2</Text>
+                                </View>
                             </View>
                         </View>
+                        <View>
+                            <Text style={styles.price}>{this.state.lyftPrice}</Text>
+                            <Text style={styles.eta}>11:20 AM</Text>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.price}>{this.state.lyftPrice}</Text>
-                        <Text style={styles.eta}>11:20 AM</Text>
-                    </View>
-                </View>
+                </TouchableHighlight>
+
 
                 <View style={styles.priceContainer}>
                     <View style={styles.leftSide}>
