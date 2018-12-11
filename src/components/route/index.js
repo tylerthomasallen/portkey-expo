@@ -6,8 +6,7 @@ import { googlePlaces } from '../../api/google';
 import { withNavigation } from 'react-navigation';
 
 import { setOrigin, setDestination } from '../../actions/route';
-
-const GOOGLE_PLACES_API_KEY = 'AIzaSyBwf8koig1eA-aer5qBvPNhuBCz6V11E5A'
+import { getLatLng } from '../../api/google';
 
 const styles = StyleSheet.create({
     container: {
@@ -132,18 +131,21 @@ class RouteSearch extends React.Component {
 
     }
 
-    handlePress = (location) => {
+    handlePress = async (location) => {
         const { title, localOrigin, localDestination } = this.state;
         const { setOrigin, setDestination } = this.props;
         const { navigate } = this.props.navigation; 
 
         if (title === 'Pickup') {
             this.setState({ localOrigin: location, results: [] })
-            setOrigin(location)
+            const originCoords = await getLatLng(location);
+            debugger;
+            setOrigin({address: location, ...originCoords})
 
         } else {
             this.setState({ localDestination: location, results: [] })
-            setDestination(location)
+            const desCoords = await getLatLng(location);
+            setDestination({address: location, ...desCoords})
         }
 
         if (localOrigin.length >= 1 && localDestination.length >= 1) {

@@ -1,6 +1,6 @@
 import { RECEIVE_ORIGIN } from '../actions/route';
 
-const originReducer = (state = '', action) => {
+const originReducer = (state = {address: ''}, action) => {
     Object.freeze(state)
     switch (action.type) {
         case RECEIVE_ORIGIN:

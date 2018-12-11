@@ -1,4 +1,4 @@
-import { getLocation } from '../api/google';
+import { getLocation, getLatLng } from '../api/google';
 
 export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
 

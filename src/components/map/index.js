@@ -48,9 +48,6 @@ class Map extends React.Component {
         const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
         this.setState({normalDrivers})
 
-        // const accessToken = await lyftAuthToken();
-        // this.setState({accessToken})
-
         // const prices = await lyftCost(this.state.accessToken, sampleTrip);
 
     }
@@ -58,16 +55,22 @@ class Map extends React.Component {
     showDirections = () => {
         const { origin, destination } = this.props;
 
-        if (origin.length >= 1 && destination.length >= 1) {
+        if (origin.address.length >= 1 && destination.address.length >= 1) {
             debugger;
             return (
-                <MapViewDirections 
-                origin={origin}
-                destination={destination}
-                apikey={GOOGLE_DIRECTIONS_API_KEY}
-                strokeWidth={5}
-                strokeColor="hotpink"
-                />
+                <React.Fragment>
+
+                    <MapViewDirections 
+                    origin={origin.address}
+                    destination={destination.address}
+                    apikey={GOOGLE_DIRECTIONS_API_KEY}
+                    strokeWidth={5}
+                    strokeColor="hotpink"
+                    />
+
+                    <MapView.Marker coordinate={{latitude: origin.lat, longitude: origin.lng}}/>
+                    <MapView.Marker coordinate={{latitude: destination.lat, longitude: destination.lng}} />
+                </React.Fragment>
             )
         }
     }

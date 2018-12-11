@@ -1,6 +1,5 @@
 import { Location, Permissions } from 'expo';
-
-const GOOGLE_PLACES_API_KEY = 'AIzaSyBwf8koig1eA-aer5qBvPNhuBCz6V11E5A'
+import { GOOGLE_PLACES_API_KEY } from '../constants/keys';
 
 export const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -29,3 +28,17 @@ export const googlePlaces = async (input) => {
         console.log(error)
     }
 };
+
+export const getLatLng = async (input) => {
+    try {
+        let placeSearchResponse = await fetch(
+            `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${input}&inputtype=textquery&fields=geometry&key=${GOOGLE_PLACES_API_KEY}`
+
+        )
+        let placeSearchJSON = await placeSearchResponse.json();
+        debugger;
+        return placeSearchJSON.candidates[0].geometry.location;
+    } catch (error) {
+        console.log(error)
+    }
+}
