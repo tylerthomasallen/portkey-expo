@@ -36,7 +36,6 @@ export const getLatLng = async (input) => {
 
         )
         let placeSearchJSON = await placeSearchResponse.json();
-        debugger;
         return placeSearchJSON.candidates[0].geometry.location;
     } catch (error) {
         console.log(error)

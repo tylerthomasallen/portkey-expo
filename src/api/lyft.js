@@ -22,16 +22,18 @@ export const lyftAuthToken = async () => {
 
 }
 
-export const lyftCost = async (accessToken, sampleTrip) => {
+export const lyftCost = async (tripData) => {
+    const { origin, destination, authToken} = tripData;
     try {
         let costResponse = await fetch(
-            `https://api.lyft.com/v1/cost?start_lat=${sampleTrip.startLat}&start_lng=${sampleTrip.startLng}&end_lat=${sampleTrip.endLat}&end_lng=${sampleTrip.endLng}`, {
+            `https://api.lyft.com/v1/cost?start_lat=${origin.lat}&start_lng=${origin.lng}&end_lat=${destination.lat}&end_lng=${destination.lng}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `bearer ${accessToken}`
+                    'Authorization': `bearer ${authToken}`
                 }
             });
         let costJSON = await costResponse.json();
+        debugger;
         return costJSON;
     } catch (error) {
         console.log(error)

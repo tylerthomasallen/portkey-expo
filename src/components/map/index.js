@@ -56,7 +56,6 @@ class Map extends React.Component {
         const { origin, destination } = this.props;
 
         if (origin.address.length >= 1 && destination.address.length >= 1) {
-            debugger;
             return (
                 <React.Fragment>
 

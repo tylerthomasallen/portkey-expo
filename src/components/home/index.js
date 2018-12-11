@@ -14,7 +14,7 @@ class HomeScreen extends React.Component {
     render() {
         const { origin, destination } = this.props;
 
-        if (origin.length >= 1 && destination.length >= 1) {
+        if (origin.address.length >= 1 && destination.address.length >= 1) {
             return (
                 <View style={{ flex: 1 }}>
                     <Map />

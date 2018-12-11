@@ -129,28 +129,42 @@ class Price extends React.Component {
 
     }
 
-    async componentDidMount() {
-        // const prices = await lyftCost(this.props.authToken, sampleTrip);
-        // const estimatedPriceCents = prices.cost_estimates[0].estimated_cost_cents_min;
-        // const dollars = estimatedPriceCents / 100;
-        // let cents = estimatedPriceCents % 100;
+    convertPriceFromCents = (price) => {
+        const dollars = parseInt(price / 100);
+        let cents = price % 100;
 
-        // if (cents < 10) {
-        //     cents = `0${cents}`
-        // }
+        if (cents < 10) {
+            cents = `0${cents}`
+        }
 
-        // this.setState({lyftPrice: `$${dollars}.${cents}`})
-        // debugger;
+        debugger;
+
+        return `$${dollars}.${cents}`;
+    }
+
+    async componentWillMount() {
+        const { origin, destination, authToken } = this.props;
+
+        const prices = await lyftCost({origin, destination, authToken});
+        const estimatedPriceCentsMin = prices.cost_estimates[1].estimated_cost_cents_min;
+        const estimatedPriceCentsMax = prices.cost_estimates[1].estimated_cost_cents_max;
+        const average = ((estimatedPriceCentsMin + estimatedPriceCentsMax) / 2)
+
+        debugger;
+
+        const formattedAverage = this.convertPriceFromCents(average);
+        
+        this.setState({lyftPrice: `${formattedAverage}`})
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
-                    Shared
+                    Economy
                 </Text>
                 <Text style={styles.subtitle}>
-                    Affordable rides, with a new friend
+                    Affordable rides, all to yourself :)
                 </Text>
 
                 <View style={styles.lyftPriceContainer}>
@@ -191,10 +205,11 @@ class Price extends React.Component {
     }
 }
 
-const mapStateToProps = ({ origin, destination }) => {
+const mapStateToProps = ({ origin, destination, authToken }) => {
     return {
         origin,
-        destination
+        destination,
+        authToken
     }
 };
 

@@ -139,13 +139,12 @@ class RouteSearch extends React.Component {
         if (title === 'Pickup') {
             this.setState({ localOrigin: location, results: [] })
             const originCoords = await getLatLng(location);
-            debugger;
-            setOrigin({address: location, ...originCoords})
+            await setOrigin({address: location, ...originCoords})
 
         } else {
             this.setState({ localDestination: location, results: [] })
             const desCoords = await getLatLng(location);
-            setDestination({address: location, ...desCoords})
+            await setDestination({address: location, ...desCoords})
         }
 
         if (localOrigin.length >= 1 && localDestination.length >= 1) {
