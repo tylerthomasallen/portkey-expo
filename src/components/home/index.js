@@ -1,15 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 
 import Map from '../map';
 import HomeSearch from './home_search';
 import Price from '../price';
 import { connect } from 'react-redux';
+import NavOptions from '../nav';
+
 
 class HomeScreen extends React.Component {
-    // static navigationOptions = {
-    //     title: 'Welcome'
-    // };
+    static navigationOptions = {
+        headerTitle: <NavOptions />
+    };
 
     render() {
         const { origin, destination } = this.props;
