@@ -89,32 +89,30 @@ const styles = StyleSheet.create({
 
     carTypeTitle: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 24
+    },
+
+    carTypeTitleLyft: {
+        fontWeight: 'bold',
+        fontSize: 24,
+        color: '#ff00bf'
     },
 
     price: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 24
+    },
+
+    lyftPrice: {
+        fontWeight: 'bold',
+        fontSize: 24,
+        color: '#ff00bf' 
     },
 
     eta: {
         color: '#352384'
     }
 })
-
-const region = {
-    latitude: 37.754090,
-    longitude: -122.413934,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
-};
-
-const sampleTrip = {
-    endLat: 37.793108,
-    endLng: -122.432374,
-    startLat: region.latitude,
-    startLng: region.longitude
-}
 
 
 
@@ -175,16 +173,16 @@ class Price extends React.Component {
                         <View style={styles.leftSide}>
                             <Ionicons name="ios-car" style={styles.lyftCar} />
                             <View style={styles.carTypeTitleContainer}>
-                                <Text style={styles.carTypeTitle}>Lyft Line</Text>
-                                <View style={styles.personContainer}>
+                                <Text style={styles.carTypeTitleLyft}>Lyft</Text>
+                                {/* <View style={styles.personContainer}>
                                     <Ionicons name="ios-person" style={styles.person} />
-                                    <Text style={{fontSize: 12}}>1-2</Text>
-                                </View>
+                                    <Text style={{ fontSize: 12 }}>1-4</Text>
+                                </View> */}
                             </View>
                         </View>
                         <View>
-                            <Text style={styles.price}>{this.state.lyftPrice}</Text>
-                            <Text style={styles.eta}>11:20 AM</Text>
+                            <Text style={styles.lyftPrice}>{this.state.lyftPrice}</Text>
+                            {/* <Text style={styles.eta}>11:20 AM</Text> */}
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -194,16 +192,16 @@ class Price extends React.Component {
                     <View style={styles.leftSide}>
                         <Ionicons name="ios-car" style={styles.uberCar} />
                         <View style={styles.carTypeTitleContainer}>
-                            <Text style={styles.carTypeTitle}>Uber Pool</Text>
-                            <View style={styles.personContainer}>
+                            <Text style={styles.carTypeTitle}>Uber</Text>
+                            {/* <View style={styles.personContainer}>
                                 <Ionicons name="ios-person" style={styles.person} />
-                                <Text style={{ fontSize: 12 }}>1-2</Text>
-                            </View>
+                                <Text style={{ fontSize: 12 }}>1-4</Text>
+                            </View> */}
                         </View>
                     </View>
                     <View>
                         <Text style={styles.price}>$8.49</Text>
-                        <Text style={styles.eta}>11:20 AM</Text>
+                        {/* <Text style={styles.eta}>11:20 AM</Text> */}
                     </View>
                 </View>
             </View>
