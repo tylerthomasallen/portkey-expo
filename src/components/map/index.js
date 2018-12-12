@@ -60,7 +60,7 @@ class Map extends React.Component {
                 <React.Fragment>
 
                     <MapViewDirections 
-                    origin={origin.address}
+                    origin={{latitude: origin.lat, longitude: origin.lng}}
                     destination={destination.address}
                     apikey={GOOGLE_DIRECTIONS_API_KEY}
                     strokeWidth={5}

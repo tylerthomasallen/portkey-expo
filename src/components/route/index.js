@@ -7,6 +7,7 @@ import { withNavigation } from 'react-navigation';
 
 import { setOrigin, setDestination } from '../../actions/route';
 import { getLatLng } from '../../api/google';
+import { Ionicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
     container: {
@@ -98,6 +99,25 @@ const styles = StyleSheet.create({
 
     resultsContainer: {
         marginTop: 10
+    },
+
+    currentLocation: {
+        paddingLeft: 15,
+        paddingTop: 10,
+        paddingBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    clTitle: {
+        fontSize: 18,
+        color: 'blue'
+    },
+
+    clIcon: {
+        fontSize: 35,
+        color: 'blue',
+        marginRight: 10
     }
 
 
@@ -137,7 +157,10 @@ class RouteSearch extends React.Component {
         if (title === 'Pickup' && localOrigin !== 'Current Location') {
             return (
                 <TouchableHighlight onPress={() => this.handleCurrentLocation()}>
-                    <Text>Current Location</Text>
+                    <View style={styles.currentLocation}>
+                        <Ionicons style={styles.clIcon} name="ios-locate" />
+                        <Text style={styles.clTitle}>Current Location</Text>
+                    </View>
                 </TouchableHighlight>
             )
         }
