@@ -1,6 +1,15 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 20,
+        color: '#ff00bf',
+        fontWeight: 'bold'
+    }
+})
 
 
 class NavOptions extends React.Component {
@@ -11,12 +20,31 @@ class NavOptions extends React.Component {
     }
 
     render() {
-        return (
-            <TouchableHighlight onPress={() => this.changeRoute()}>
-                <Text>Change Route</Text>
-            </TouchableHighlight>
-        )
+        const { origin, destination } = this.props;
+
+        if (origin.lat !== undefined && destination.lat !== undefined) {
+            return (
+                <TouchableHighlight onPress={() => this.changeRoute()} underlayColor="white">
+                    <Text style={styles.title}>Change Route</Text>
+                </TouchableHighlight>
+            )
+        } else {
+            return null;
+        }
     }
 }
 
-export default withNavigation(NavOptions);
+const mapStateToProps = ({ origin, destination }) => {
+    return {
+        origin,
+        destination
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+});
+
+export default withNavigation(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NavOptions))
