@@ -131,6 +131,27 @@ class RouteSearch extends React.Component {
 
     }
 
+    currentLocation = () => {
+        const { title, localOrigin } = this.state;
+
+        if (title === 'Pickup' && localOrigin !== 'Current Location') {
+            return (
+                <TouchableHighlight onPress={() => this.handleCurrentLocation()}>
+                    <Text>Current Location</Text>
+                </TouchableHighlight>
+            )
+        }
+    }
+
+    handleCurrentLocation = async () => {
+        const { currentLocation, setOrigin } = this.props;
+
+        this.setState({localOrigin: 'Current Location', results: []})
+        await setOrigin({address: 'Current Location', lat: currentLocation.latitude, lng: currentLocation.longitude})
+
+        debugger;
+    }
+
     handlePress = async (location) => {
         const { title, localOrigin, localDestination } = this.state;
         const { setOrigin, setDestination } = this.props;
@@ -199,6 +220,10 @@ class RouteSearch extends React.Component {
                 </View>
 
                 <View style={styles.resultsContainer}>
+
+                    {this.currentLocation()}
+
+
                     {this.state.results.map((location, idx) => {
                         return (
                             <TouchableHighlight key={idx + 1} onPress={() => this.handlePress(location.description)}>
