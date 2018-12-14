@@ -131,6 +131,11 @@ class Price extends React.Component {
         Linking.openURL(`https://lyft.com/ride?id=lyft&pickup[latitude]=${origin.lat}&pickup[longitude]=${origin.lng}&partner=${LYFT_CLIENT_ID}&destination[latitude]=${destination.lat}&destination[longitude]=${destination.lng}`)
     }
 
+    linkToUber = () => {
+        const { origin, destination } = this.props;
+        Linking.openURL(`https://m.uber.com/ul/`);
+    }
+
     // convertPriceFromCents = (price) => {
     //     const dollars = parseInt(price / 100);
     //     let cents = price % 100;
@@ -198,23 +203,27 @@ class Price extends React.Component {
                     </View>
                 </TouchableHighlight>
 
-
-                <View style={styles.priceContainer}>
-                    <View style={styles.leftSide}>
-                        <Ionicons name="ios-car" style={styles.uberCar} />
-                        <View style={styles.carTypeTitleContainer}>
-                            <Text style={styles.carTypeTitle}>Uber</Text>
-                            {/* <View style={styles.personContainer}>
-                                <Ionicons name="ios-person" style={styles.person} />
-                                <Text style={{ fontSize: 12 }}>1-4</Text>
-                            </View> */}
+                <TouchableHighlight onPress={() => this.linkToUber()} underlayColor="white">
+                    <View style={styles.priceContainer}>
+                        <View style={styles.leftSide}>
+                            <Ionicons name="ios-car" style={styles.uberCar} />
+                            <View style={styles.carTypeTitleContainer}>
+                                <Text style={styles.carTypeTitle}>Uber</Text>
+                                {/* <View style={styles.personContainer}>
+                                    <Ionicons name="ios-person" style={styles.person} />
+                                    <Text style={{ fontSize: 12 }}>1-4</Text>
+                                </View> */}
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={styles.price}>~$8.49</Text>
+                            {/* <Text style={styles.eta}>11:20 AM</Text> */}
                         </View>
                     </View>
-                    <View>
-                        <Text style={styles.price}>~$8.49</Text>
-                        {/* <Text style={styles.eta}>11:20 AM</Text> */}
-                    </View>
-                </View>
+
+                </TouchableHighlight>
+
+
             </View>
         )
     }
