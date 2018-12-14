@@ -133,7 +133,7 @@ class Price extends React.Component {
 
     linkToUber = () => {
         const { origin, destination } = this.props;
-        Linking.openURL(`https://m.uber.com/ul/`);
+        Linking.openURL(`https://m.uber.com/ul/?action=setPickup&pickup[latitude]=${origin.lat}&pickup[longitude]=${origin.lng}&pickup[nickname]=${origin.address}&dropoff[latitude]=${destination.lat}&dropoff[longitude]=${destination.lng}&dropoff[formatted_address]=${destination.address}`);
     }
 
     // convertPriceFromCents = (price) => {
@@ -167,7 +167,7 @@ class Price extends React.Component {
 
 
     async componentWillMount() {
-        const { origin, destination, authToken, getLyftCost, lyftPrice } = this.props;
+        const { origin, destination, authToken, getLyftCost } = this.props;
         await getLyftCost({origin, destination, authToken})
         
     }
@@ -216,7 +216,7 @@ class Price extends React.Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={styles.price}>~$8.49</Text>
+                            <Text style={styles.price}>?</Text>
                             {/* <Text style={styles.eta}>11:20 AM</Text> */}
                         </View>
                     </View>
