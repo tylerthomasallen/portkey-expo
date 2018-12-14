@@ -48,8 +48,6 @@ class Map extends React.Component {
         const normalDrivers = nearbyRides.nearby_drivers[1].drivers;
         this.setState({normalDrivers})
 
-        // const prices = await lyftCost(this.state.accessToken, sampleTrip);
-
     }
 
     showDirections = () => {
@@ -78,7 +76,7 @@ class Map extends React.Component {
 
     render() {
         const Marker = MapView.Marker
-        const { currentLocation } = this.props
+        const { currentLocation } = this.props;
         
         return (
            

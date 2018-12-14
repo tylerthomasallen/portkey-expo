@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { lyftCost } from '../../api/lyft';
+import { getLyftCost } from '../../actions/lyft';
 import { Ionicons } from '@expo/vector-icons';
 
 import { LYFT_CLIENT_ID } from '../../constants/keys';
@@ -119,9 +120,9 @@ const styles = StyleSheet.create({
 class Price extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-           lyftPrice: ''
+            lyftPrice: ''
         }
     }
 
@@ -130,35 +131,45 @@ class Price extends React.Component {
         Linking.openURL(`https://lyft.com/ride?id=lyft&pickup[latitude]=${origin.lat}&pickup[longitude]=${origin.lng}&partner=${LYFT_CLIENT_ID}&destination[latitude]=${destination.lat}&destination[longitude]=${destination.lng}`)
     }
 
-    convertPriceFromCents = (price) => {
-        const dollars = parseInt(price / 100);
-        let cents = price % 100;
+    // convertPriceFromCents = (price) => {
+    //     const dollars = parseInt(price / 100);
+    //     let cents = price % 100;
 
-        if (cents < 10) {
-            cents = `0${cents}`
-        }
+    //     if (cents < 10) {
+    //         cents = `0${cents}`
+    //     }
 
-        debugger;
 
-        return `$${dollars}.${cents}`;
-    }
+    //     return `$${dollars}.${cents}`;
+    // }
+
+    // formattedLyftPrice = () => {
+    //     const { lyftPrice } = this.props;
+    //     debugger;
+
+    //     if (lyftPrice.length >= 1) {
+    //         const estimatedPriceCentsMin = lyftPrice.cost_estimates[1].estimated_cost_cents_min;
+    //         const estimatedPriceCentsMax = lyftPrice.cost_estimates[1].estimated_cost_cents_max;
+    //         const average = ((estimatedPriceCentsMin + estimatedPriceCentsMax) / 2)
+    
+    //         const formattedAverage = this.convertPriceFromCents(average);
+    //         return formattedAverage;
+    //     } else {
+    //         return ''
+    //     }
+
+    // }
+
 
     async componentWillMount() {
-        const { origin, destination, authToken } = this.props;
-
-        const prices = await lyftCost({origin, destination, authToken});
-        const estimatedPriceCentsMin = prices.cost_estimates[1].estimated_cost_cents_min;
-        const estimatedPriceCentsMax = prices.cost_estimates[1].estimated_cost_cents_max;
-        const average = ((estimatedPriceCentsMin + estimatedPriceCentsMax) / 2)
-
-        debugger;
-
-        const formattedAverage = this.convertPriceFromCents(average);
+        const { origin, destination, authToken, getLyftCost, lyftPrice } = this.props;
+        await getLyftCost({origin, destination, authToken})
         
-        this.setState({lyftPrice: `${formattedAverage}`})
     }
 
     render() {
+        const { lyftPrice } = this.props;
+        debugger;
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
@@ -181,7 +192,7 @@ class Price extends React.Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={styles.lyftPrice}>{this.state.lyftPrice}</Text>
+                            <Text style={styles.lyftPrice}>~{lyftPrice}</Text>
                             {/* <Text style={styles.eta}>11:20 AM</Text> */}
                         </View>
                     </View>
@@ -200,7 +211,7 @@ class Price extends React.Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={styles.price}>$8.49</Text>
+                        <Text style={styles.price}>~$8.49</Text>
                         {/* <Text style={styles.eta}>11:20 AM</Text> */}
                     </View>
                 </View>
@@ -209,16 +220,18 @@ class Price extends React.Component {
     }
 }
 
-const mapStateToProps = ({ origin, destination, authToken }) => {
+const mapStateToProps = ({ origin, destination, authToken, lyftPrice }) => {
     return {
         origin,
         destination,
-        authToken
+        authToken,
+        lyftPrice
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-    lyftCost: (authToken) => dispatch(lyftCost(authToken))
+    lyftCost: (authToken) => dispatch(lyftCost(authToken)),
+    getLyftCost: (tripData) => dispatch(getLyftCost(tripData))
 });
 
 export default connect(

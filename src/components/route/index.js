@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SearchResult from './search_result';
 import { googlePlaces } from '../../api/google';
 import { withNavigation } from 'react-navigation';
+import { getLyftCost } from '../../actions/lyft';
 
 import { setOrigin, setDestination } from '../../actions/route';
 import { getLatLng } from '../../api/google';
@@ -167,12 +168,11 @@ class RouteSearch extends React.Component {
     }
 
     handleCurrentLocation = async () => {
-        const { currentLocation, setOrigin } = this.props;
+        const { currentLocation, setOrigin, getLyftCost, authToken } = this.props;
 
         this.setState({localOrigin: 'Current Location', results: []})
         await setOrigin({address: 'Current Location', lat: currentLocation.latitude, lng: currentLocation.longitude})
-
-        debugger;
+        
     }
 
     handlePress = async (location) => {
@@ -181,12 +181,12 @@ class RouteSearch extends React.Component {
         const { navigate } = this.props.navigation; 
 
         if (title === 'Pickup') {
-            this.setState({ localOrigin: location, results: [] })
+            await this.setState({ localOrigin: location, results: [] })
             const originCoords = await getLatLng(location);
             await setOrigin({address: location, ...originCoords})
 
         } else {
-            this.setState({ localDestination: location, results: [] })
+            await this.setState({ localDestination: location, results: [] })
             const desCoords = await getLatLng(location);
             await setDestination({address: location, ...desCoords})
         }
@@ -194,10 +194,6 @@ class RouteSearch extends React.Component {
         if (localOrigin.length >= 1 && localDestination.length >= 1) {
             navigate('Home')
         }
-    }
-
-    textInputValue = (type) => {
-        return this.state.type;
     }
 
     render() {
@@ -261,22 +257,21 @@ class RouteSearch extends React.Component {
     }
 }
 
-// this.state.normalDrivers.map((driver, idx) => {
-//     <Marker key={idx} title='test' coordinate={{ latitude: driver.locations[0].lat, longitude: driver.locations[0].lng }} />
-// })
 
-const mapStateToProps = ({ origin, destination, currentLocation }) => {
+const mapStateToProps = ({ origin, destination, currentLocation, authToken }) => {
     return {
         origin,
         destination,
-        currentLocation
+        currentLocation,
+        authToken
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     getGoogleLoc: () => dispatch(getGoogleLoc()),
     setOrigin: (location) => dispatch(setOrigin(location)),
-    setDestination: (location) => dispatch(setDestination(location))
+    setDestination: (location) => dispatch(setDestination(location)),
+    getLyftCost: (tripData) => dispatch(getLyftCost(tripData))
 });
 
 export default withNavigation(connect(

@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     input: {
         shadowOpacity: 0,
         shadowColor: 'white',
-        margin: 5
+        margin: 5,
+        fontSize: 20
     },
 
     addressContainer: {
@@ -109,7 +110,7 @@ class HomeSearch extends React.Component {
                 <View style={styles.upperContainer}>
 
                     <Text style={styles.greeting}>
-                        Hey, Tyler
+                        Hey partner,
                     </Text>
 
                     <Text style={styles.title}>

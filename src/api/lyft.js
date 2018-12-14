@@ -23,7 +23,8 @@ export const lyftAuthToken = async () => {
 }
 
 export const lyftCost = async (tripData) => {
-    const { origin, destination, authToken} = tripData;
+    const { origin, destination, authToken } = tripData;
+    debugger;
     try {
         let costResponse = await fetch(
             `https://api.lyft.com/v1/cost?start_lat=${origin.lat}&start_lng=${origin.lng}&end_lat=${destination.lat}&end_lng=${destination.lng}`, {
@@ -33,8 +34,12 @@ export const lyftCost = async (tripData) => {
                 }
             });
         let costJSON = await costResponse.json();
-        debugger;
-        return costJSON;
+        const estimatedPriceCentsMin = costJSON.cost_estimates[1].estimated_cost_cents_min;
+        const estimatedPriceCentsMax = costJSON.cost_estimates[1].estimated_cost_cents_max;
+        const average = ((estimatedPriceCentsMin + estimatedPriceCentsMax) / 2)
+
+        const formattedAverage = convertPriceFromCents(average);
+        return formattedAverage;
     } catch (error) {
         console.log(error)
     }
@@ -54,4 +59,18 @@ export const lyftNearbyRides = async (accessToken, location) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+// helpers to format response of lyftCost function call
+
+convertPriceFromCents = (price) => {
+    const dollars = parseInt(price / 100);
+    let cents = price % 100;
+
+    if (cents < 10) {
+        cents = `0${cents}`
+    }
+
+
+    return `$${dollars}.${cents}`;
 }
