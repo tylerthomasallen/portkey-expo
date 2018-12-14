@@ -65,8 +65,16 @@ class Map extends React.Component {
                     strokeColor="hotpink"
                     />
 
-                    <MapView.Marker coordinate={{latitude: origin.lat, longitude: origin.lng}}/>
-                    <MapView.Marker coordinate={{latitude: destination.lat, longitude: destination.lng}} />
+                    <MapView.Marker 
+                        coordinate={{latitude: origin.lat, longitude: origin.lng}}
+                        title={origin.address}
+                        
+                        
+                    />
+                    <MapView.Marker 
+                        coordinate={{latitude: destination.lat, longitude: destination.lng}} 
+                        title={destination.address}
+                    />
                 </React.Fragment>
             )
         }
