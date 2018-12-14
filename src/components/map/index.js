@@ -68,12 +68,15 @@ class Map extends React.Component {
                     <MapView.Marker 
                         coordinate={{latitude: origin.lat, longitude: origin.lng}}
                         title={origin.address}
+                        image={require('./flag-1.png')}
+                        style={{height: 5, width: 5}}
                         
                         
                     />
                     <MapView.Marker 
                         coordinate={{latitude: destination.lat, longitude: destination.lng}} 
                         title={destination.address}
+                        image={require('./flag-1.png')}
                     />
                 </React.Fragment>
             )
