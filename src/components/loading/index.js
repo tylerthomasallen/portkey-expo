@@ -35,15 +35,17 @@ class Loading extends React.Component {
     render() {
         return (
 
-            <ImageBackground source={require('./flower.jpg')} style={styles.container}>
+            <ImageBackground source={require('./fallout.jpg')} style={styles.container}>
             
-                    <Text style={styles.title}>Hang Tight</Text>
-                    <ActivityIndicator color="#ff00bf" size="large" />
+                    {/* <Text style={styles.title}>Hang Tight</Text> */}
+                    <ActivityIndicator color="white" size="large" />
 
             </ImageBackground>
             
         )
     }
 }
+
+// lyft pink for loader: #ff00bf
 
 export default Loading;
