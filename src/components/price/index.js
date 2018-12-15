@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Linking, StatusBar, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { uberCost } from '../../api/uber';
 import { getLyftCost } from '../../actions/lyft';
@@ -150,58 +150,69 @@ class Price extends React.Component {
     render() {
         const { lyftPrice } = this.props;
         const { uberPrice } = this.state;
-        debugger;
-        return (
-            <View style={styles.container}>
-                <Text style={styles.title}>
-                    Economy
+
+        if (uberPrice.length <= 0) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#34495e' }}>
+                    <StatusBar backgroundColor="#2c3e50" barStyle="light-content" /> 
+                    <Text style={{ color: 'white', fontSize: 18 }}>Hello Splash</Text>
+                    <ActivityIndicator color={'white'} /> 
+                </View>
+            )
+        } else {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.title}>
+                        Economy
                 </Text>
-                <Text style={styles.subtitle}>
-                    Affordable rides, all to yourself :)
+                    <Text style={styles.subtitle}>
+                        Affordable rides, all to yourself :)
                 </Text>
 
-                <TouchableHighlight onPress={() => this.linkToLyft()} underlayColor='white'>
-                    <View style={styles.lyftPriceContainer}>
-                        <View style={styles.leftSide}>
-                            <Ionicons name="ios-car" style={styles.lyftCar} />
-                            <View style={styles.carTypeTitleContainer}>
-                                <Text style={styles.carTypeTitleLyft}>Lyft</Text>
-                                {/* <View style={styles.personContainer}>
+                    <TouchableHighlight onPress={() => this.linkToLyft()} underlayColor='white'>
+                        <View style={styles.lyftPriceContainer}>
+                            <View style={styles.leftSide}>
+                                <Ionicons name="ios-car" style={styles.lyftCar} />
+                                <View style={styles.carTypeTitleContainer}>
+                                    <Text style={styles.carTypeTitleLyft}>Lyft</Text>
+                                    {/* <View style={styles.personContainer}>
                                     <Ionicons name="ios-person" style={styles.person} />
                                     <Text style={{ fontSize: 12 }}>1-4</Text>
                                 </View> */}
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={styles.lyftPrice}>~{lyftPrice}</Text>
+                                {/* <Text style={styles.eta}>11:20 AM</Text> */}
                             </View>
                         </View>
-                        <View>
-                            <Text style={styles.lyftPrice}>~{lyftPrice}</Text>
-                            {/* <Text style={styles.eta}>11:20 AM</Text> */}
-                        </View>
-                    </View>
-                </TouchableHighlight>
+                    </TouchableHighlight>
 
-                <TouchableHighlight onPress={() => this.linkToUber()} underlayColor="white">
-                    <View style={styles.priceContainer}>
-                        <View style={styles.leftSide}>
-                            <Ionicons name="ios-car" style={styles.uberCar} />
-                            <View style={styles.carTypeTitleContainer}>
-                                <Text style={styles.carTypeTitle}>Uber</Text>
-                                {/* <View style={styles.personContainer}>
+                    <TouchableHighlight onPress={() => this.linkToUber()} underlayColor="white">
+                        <View style={styles.priceContainer}>
+                            <View style={styles.leftSide}>
+                                <Ionicons name="ios-car" style={styles.uberCar} />
+                                <View style={styles.carTypeTitleContainer}>
+                                    <Text style={styles.carTypeTitle}>Uber</Text>
+                                    {/* <View style={styles.personContainer}>
                                     <Ionicons name="ios-person" style={styles.person} />
                                     <Text style={{ fontSize: 12 }}>1-4</Text>
                                 </View> */}
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={styles.price}>~{uberPrice}</Text>
+                                {/* <Text style={styles.eta}>11:20 AM</Text> */}
                             </View>
                         </View>
-                        <View>
-                            <Text style={styles.price}>~{uberPrice}</Text>
-                            {/* <Text style={styles.eta}>11:20 AM</Text> */}
-                        </View>
-                    </View>
 
-                </TouchableHighlight>
+                    </TouchableHighlight>
 
 
-            </View>
-        )
+                </View>
+
+            )
+        }  
     }
 }
 
