@@ -6,6 +6,7 @@ import HomeSearch from './home_search';
 import Price from '../price';
 import { connect } from 'react-redux';
 import NavOptions from '../nav';
+import Loading from '../loading';
 
 
 class HomeScreen extends React.Component {

@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight, Linking, StatusBar, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { uberCost } from '../../api/uber';
 import { getLyftCost } from '../../actions/lyft';
 import { Ionicons } from '@expo/vector-icons';
+import Loading from '../loading';
 
 import { LYFT_CLIENT_ID } from '../../constants/keys';
 
@@ -147,17 +148,17 @@ class Price extends React.Component {
         
     }
 
+    async componentWillUnmount() {
+        debugger;
+    }
+
     render() {
         const { lyftPrice } = this.props;
         const { uberPrice } = this.state;
 
         if (uberPrice.length <= 0) {
             return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#34495e' }}>
-                    <StatusBar backgroundColor="#2c3e50" barStyle="light-content" /> 
-                    <Text style={{ color: 'white', fontSize: 18 }}>Hello Splash</Text>
-                    <ActivityIndicator color={'white'} /> 
-                </View>
+                <Loading />
             )
         } else {
             return (
