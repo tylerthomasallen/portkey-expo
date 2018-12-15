@@ -5,6 +5,7 @@ import { uberCost } from '../../api/uber';
 import { getLyftCost } from '../../actions/lyft';
 import { Ionicons } from '@expo/vector-icons';
 import Loading from '../loading';
+import { NavigationEvents } from 'react-navigation';
 
 import { LYFT_CLIENT_ID } from '../../constants/keys';
 
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
 })
 
 
-
 class Price extends React.Component {
 
     constructor(props) {
@@ -150,6 +150,18 @@ class Price extends React.Component {
         
     }
 
+    // loadComponent = async () => {
+    //     debugger;
+    //     this.setState({loading: true})
+    //     const { origin, destination, authToken, getLyftCost } = this.props;
+    //     await getLyftCost({ origin, destination, authToken })
+    //     const uberPrice = await uberCost({ origin, destination });
+    //     await this.setState({ uberPrice });
+    //     debugger;
+    //     await this.setState({ loading: false })
+
+    // }
+
     render() {
         const { lyftPrice } = this.props;
         const { uberPrice, loading } = this.state;
@@ -161,6 +173,9 @@ class Price extends React.Component {
         } else {
             return (
                 <View style={styles.container}>
+                    <NavigationEvents 
+                    onWillFocus={() => loadComponent()}
+                    />
                     <Text style={styles.title}>
                         Economy
                 </Text>
