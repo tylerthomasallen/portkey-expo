@@ -139,10 +139,11 @@ class RouteSearch extends React.Component {
     }
 
     handleInput = async (text, type) => {
+        const { currentLocation } = this.props;
         this.setState({[type]: text})
 
         if (text.length >= 2) {
-           const googleResponse = await googlePlaces(text)
+           const googleResponse = await googlePlaces(text, currentLocation)
            this.setState({results: googleResponse})
         }
 

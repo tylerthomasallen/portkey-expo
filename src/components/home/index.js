@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View } from 'react-native';
 
 import Map from '../map';
 import HomeSearch from './home_search';
 import Price from '../price';
 import { connect } from 'react-redux';
 import NavOptions from '../nav';
-import Loading from '../loading';
 
 
 class HomeScreen extends React.Component {
@@ -26,7 +25,7 @@ class HomeScreen extends React.Component {
             )
         } else {
             return (
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                     <Map />
                     <HomeSearch />
                 </View>
