@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
-import { lyftCost } from '../../api/lyft';
+import { uberCost } from '../../api/uber';
 import { getLyftCost } from '../../actions/lyft';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -122,7 +122,8 @@ class Price extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            lyftPrice: ''
+            lyftPrice: '',
+            uberPrice: ''
         }
     }
 
@@ -136,44 +137,19 @@ class Price extends React.Component {
         Linking.openURL(`https://m.uber.com/ul/?action=setPickup&pickup[latitude]=${origin.lat}&pickup[longitude]=${origin.lng}&pickup[nickname]=${origin.address}&dropoff[latitude]=${destination.lat}&dropoff[longitude]=${destination.lng}&dropoff[formatted_address]=${destination.address}`);
     }
 
-    // convertPriceFromCents = (price) => {
-    //     const dollars = parseInt(price / 100);
-    //     let cents = price % 100;
-
-    //     if (cents < 10) {
-    //         cents = `0${cents}`
-    //     }
-
-
-    //     return `$${dollars}.${cents}`;
-    // }
-
-    // formattedLyftPrice = () => {
-    //     const { lyftPrice } = this.props;
-    //     debugger;
-
-    //     if (lyftPrice.length >= 1) {
-    //         const estimatedPriceCentsMin = lyftPrice.cost_estimates[1].estimated_cost_cents_min;
-    //         const estimatedPriceCentsMax = lyftPrice.cost_estimates[1].estimated_cost_cents_max;
-    //         const average = ((estimatedPriceCentsMin + estimatedPriceCentsMax) / 2)
-    
-    //         const formattedAverage = this.convertPriceFromCents(average);
-    //         return formattedAverage;
-    //     } else {
-    //         return ''
-    //     }
-
-    // }
-
 
     async componentWillMount() {
         const { origin, destination, authToken, getLyftCost } = this.props;
         await getLyftCost({origin, destination, authToken})
+        const uberPrice = await uberCost({origin, destination});
+        await this.setState({uberPrice});
+        debugger;
         
     }
 
     render() {
         const { lyftPrice } = this.props;
+        const { uberPrice } = this.state;
         debugger;
         return (
             <View style={styles.container}>
@@ -216,7 +192,7 @@ class Price extends React.Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={styles.price}>?</Text>
+                            <Text style={styles.price}>~{uberPrice}</Text>
                             {/* <Text style={styles.eta}>11:20 AM</Text> */}
                         </View>
                     </View>
@@ -239,7 +215,6 @@ const mapStateToProps = ({ origin, destination, authToken, lyftPrice }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    lyftCost: (authToken) => dispatch(lyftCost(authToken)),
     getLyftCost: (tripData) => dispatch(getLyftCost(tripData))
 });
 

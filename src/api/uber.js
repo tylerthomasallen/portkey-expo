@@ -1,0 +1,25 @@
+import { UBER_SERVER_TOKEN } from '../constants/keys';
+
+export const uberCost = async (tripData) => {
+    const { origin, destination } = tripData;
+    debugger;
+    try {
+        let costRes = await fetch(`https://api.uber.com/v1.2/estimates/price?start_latitude=${origin.lat}&start_longitude=${origin.lng}&end_latitude=${destination.lat}&end_longitude=${destination.lng}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${UBER_SERVER_TOKEN}`,
+                'Accept-Language': 'en_US'
+            }
+        });
+        let costResJSON = await costRes.json();
+        let uberX = costResJSON.prices.filter(price => price.display_name === 'UberX');
+        let average = (uberX[0].low_estimate + uberX[0].high_estimate / 2)
+        let formattedPrice = `$${average}.00`;
+        debugger;
+        return formattedPrice;
+    } catch (error) {
+        console.log(error)
+    }
+
+}
