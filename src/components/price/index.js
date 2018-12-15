@@ -124,7 +124,8 @@ class Price extends React.Component {
         super(props)
         this.state = {
             lyftPrice: '',
-            uberPrice: ''
+            uberPrice: '',
+            loading: true
         }
     }
 
@@ -144,19 +145,16 @@ class Price extends React.Component {
         await getLyftCost({origin, destination, authToken})
         const uberPrice = await uberCost({origin, destination});
         await this.setState({uberPrice});
+        await this.setState({loading: false})
         debugger;
         
     }
 
-    async componentWillUnmount() {
-        debugger;
-    }
-
     render() {
         const { lyftPrice } = this.props;
-        const { uberPrice } = this.state;
+        const { uberPrice, loading } = this.state;
 
-        if (uberPrice.length <= 0) {
+        if (loading) {
             return (
                 <Loading />
             )
