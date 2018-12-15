@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { uberCost } from '../../api/uber';
+import { lyftCost } from '../../api/lyft';
 import { getLyftCost } from '../../actions/lyft';
 import { Ionicons } from '@expo/vector-icons';
 import Loading from '../loading';
@@ -125,7 +126,9 @@ class Price extends React.Component {
         this.state = {
             lyftPrice: '',
             uberPrice: '',
-            loading: true
+            loading: true,
+            localOrigin: '',
+            localDestination: ''
         }
     }
 
@@ -141,30 +144,37 @@ class Price extends React.Component {
 
 
     async componentWillMount() {
-        const { origin, destination, authToken, getLyftCost } = this.props;
-        await getLyftCost({origin, destination, authToken})
+        const { origin, destination, authToken } = this.props;
+        
+        await this.setState({ localOrigin: origin, localDestination: destination})
+
+        const lyftPrice = await lyftCost({ origin, destination, authToken })
+        await this.setState({ lyftPrice });
+
         const uberPrice = await uberCost({origin, destination});
-        await this.setState({uberPrice});
+        await this.setState({ uberPrice });
+
         await this.setState({loading: false})
-        debugger;
         
     }
 
-    // loadComponent = async () => {
-    //     debugger;
-    //     this.setState({loading: true})
-    //     const { origin, destination, authToken, getLyftCost } = this.props;
-    //     await getLyftCost({ origin, destination, authToken })
-    //     const uberPrice = await uberCost({ origin, destination });
-    //     await this.setState({ uberPrice });
-    //     debugger;
-    //     await this.setState({ loading: false })
+    loadComponent = async () => {
+        const { origin, destination, authToken } = this.props;
+        const { localOrigin, localDestination } = this.state;
 
-    // }
+        if (localOrigin.address !== origin.address || localDestination.address !== destination.address) {
+            await this.setState({ loading: true })
+            const lyftPrice = await lyftCost({ origin, destination, authToken })
+            await this.setState({ lyftPrice })
+            const uberPrice = await uberCost({ origin, destination });
+            await this.setState({ uberPrice });
+            await this.setState({ loading: false })
+        }
+
+    }
 
     render() {
-        const { lyftPrice } = this.props;
-        const { uberPrice, loading } = this.state;
+        const { uberPrice, loading, lyftPrice } = this.state;
 
         if (loading) {
             return (
@@ -174,7 +184,7 @@ class Price extends React.Component {
             return (
                 <View style={styles.container}>
                     <NavigationEvents 
-                    onWillFocus={() => loadComponent()}
+                    onWillFocus={() => this.loadComponent()}
                     />
                     <Text style={styles.title}>
                         Economy
@@ -234,8 +244,7 @@ const mapStateToProps = ({ origin, destination, authToken, lyftPrice }) => {
     return {
         origin,
         destination,
-        authToken,
-        lyftPrice
+        authToken
     }
 };
 

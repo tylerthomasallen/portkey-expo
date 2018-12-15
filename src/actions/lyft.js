@@ -11,7 +11,6 @@ export const receiveLyftToken = payload => {
 };
 
 export const receiveLyftCost = payload => {
-    debugger;
     return {
         type: RECEIVE_LYFT_COST,
         payload
@@ -19,7 +18,6 @@ export const receiveLyftCost = payload => {
 }
 
 export const getLyftCost = (tripData) => dispatch => {
-    debugger;
     return (
         lyftCost(tripData).then(
             lyftPrice => dispatch(receiveLyftCost(lyftPrice))

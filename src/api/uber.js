@@ -13,10 +13,13 @@ export const uberCost = async (tripData) => {
         });
         let costResJSON = await costRes.json();
         let uberX = costResJSON.prices.filter(price => price.display_name === 'UberX');
-        let average = `${(uberX[0].low_estimate + uberX[0].high_estimate / 2)}`
-        let formattedPrice = `$${average[0]}${average[1]}.00`
-        debugger;
-        return formattedPrice;
+        let average = `${(uberX[0].low_estimate + uberX[0].high_estimate) / 2}`
+        
+        if (average.length >= 2) {
+            return `$${average[0]}${average[1]}.00`
+        } else {
+            return `$${average[0]}.00`;
+        }
     } catch (error) {
         console.log(error)
     }

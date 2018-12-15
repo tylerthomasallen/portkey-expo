@@ -24,7 +24,6 @@ export const lyftAuthToken = async () => {
 
 export const lyftCost = async (tripData) => {
     const { origin, destination, authToken } = tripData;
-    debugger;
     try {
         let costResponse = await fetch(
             `https://api.lyft.com/v1/cost?start_lat=${origin.lat}&start_lng=${origin.lng}&end_lat=${destination.lat}&end_lng=${destination.lng}`, {
