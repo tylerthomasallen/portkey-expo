@@ -169,19 +169,23 @@ class RouteSearch extends React.Component {
     }
 
     handleCurrentLocation = async () => {
-        const { currentLocation, setOrigin, getLyftCost, authToken } = this.props;
+        const { currentLocation, setOrigin } = this.props;
+        const { navigate } = this.props.navigation; 
 
         this.setState({localOrigin: 'Current Location', results: []})
         await setOrigin({address: 'Current Location', lat: currentLocation.latitude, lng: currentLocation.longitude})
+
+        if (this.state.localOrigin.length >= 1 && this.state.localDestination.length >= 1) {
+            navigate('Home')
+        }
         
     }
 
     handlePress = async (location) => {
-        const { title, localOrigin, localDestination } = this.state;
         const { setOrigin, setDestination } = this.props;
         const { navigate } = this.props.navigation; 
 
-        if (title === 'Pickup') {
+        if (this.state.title === 'Pickup') {
             await this.setState({ localOrigin: location, results: [] })
             const originCoords = await getLatLng(location);
             await setOrigin({address: location, ...originCoords})
@@ -192,7 +196,7 @@ class RouteSearch extends React.Component {
             await setDestination({address: location, ...desCoords})
         }
 
-        if (localOrigin.length >= 1 && localDestination.length >= 1) {
+        if (this.state.localOrigin.length >= 1 && this.state.localDestination.length >= 1) {
             navigate('Home')
         }
     }

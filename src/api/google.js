@@ -19,7 +19,6 @@ export const getLocation = async () => {
 
 export const googlePlaces = async (input, currentLocation) => {
     const { latitude, longitude } = currentLocation;
-    debugger;
     try {
         let placesResponse = await fetch(
             `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&key=${GOOGLE_PLACES_API_KEY}&location=${latitude}, ${longitude}&radius=500`
