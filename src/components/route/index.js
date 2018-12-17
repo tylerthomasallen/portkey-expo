@@ -182,6 +182,8 @@ class RouteSearch extends React.Component {
     }
 
     async componentDidMount () {
+        this.destinationInput._onPress();
+        debugger;
         const { currentLocation, setOrigin } = this.props;
 
         if (currentLocation.latitude !== undefined) {
@@ -245,6 +247,7 @@ class RouteSearch extends React.Component {
                             onChangeText={(text) => this.handleInput(text, 'localDestination')}
                             onTouchStart={() => this.setState({ title: 'Dropoff', results: [], localDestination: ''})}
                             value={this.state.localDestination}
+                            ref={(destinationInput) => this.destinationInput = destinationInput}
                         >
                         </TextInput>
                     </View>
