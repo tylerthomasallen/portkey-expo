@@ -172,13 +172,22 @@ class RouteSearch extends React.Component {
         const { currentLocation, setOrigin } = this.props;
         const { navigate } = this.props.navigation; 
 
-        this.setState({localOrigin: 'Current Location', results: []})
+        await this.setState({localOrigin: 'Current Location', results: []})
         await setOrigin({address: 'Current Location', lat: currentLocation.latitude, lng: currentLocation.longitude})
 
         if (this.state.localOrigin.length >= 1 && this.state.localDestination.length >= 1) {
             navigate('Home')
         }
         
+    }
+
+    async componentDidMount () {
+        const { currentLocation, setOrigin } = this.props;
+
+        if (currentLocation.latitude !== undefined) {
+            await this.setState({localOrigin: 'Current Location'})
+            await setOrigin({ address: 'Current Location', lat: currentLocation.latitude, lng: currentLocation.longitude })
+        }
     }
 
     handlePress = async (location) => {
