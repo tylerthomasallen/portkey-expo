@@ -183,7 +183,6 @@ class RouteSearch extends React.Component {
 
     async componentDidMount () {
         this.destinationInput._onPress();
-        debugger;
         const { currentLocation, setOrigin } = this.props;
 
         if (currentLocation.latitude !== undefined) {
