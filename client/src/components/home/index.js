@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-
 import Map from '../map';
 import HomeSearch from './home_search';
 import Price from '../price';
