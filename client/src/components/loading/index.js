@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar, Text, ActivityIndicator, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Text, ActivityIndicator, StyleSheet, Image, ImageBackground } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
