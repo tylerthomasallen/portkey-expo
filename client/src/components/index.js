@@ -34,35 +34,6 @@ const AppNavigator = createBottomTabNavigator(
   }
 );
 
-  // {
-  //   tabBarOptions: {
-  //     activeTintColor: '#e91e63',
-  //     labelStyle: {
-  //       fontSize: 12,
-  //     },
-  //     style: {
-  //       backgroundColor: 'white',
-  //     },
-
-  //     safeAreaInset: {
-  //       bottom: 'never'
-  //     }
-  //   },
-
-  //   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-  //     const { routeName } = navigation.state;
-  //     let iconName;
-  //     if (routeName === 'Home') {
-  //       iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-  //     } else if (routeName === 'Settings') {
-  //       iconName = `ios-options${focused ? '' : '-outline'}`;
-  //     }
-
-  //     // You can return any component that you like here! We usually use an
-  //     // icon component from react-native-vector-icons
-  //     return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
-  //   }
-
 const AppContainer = createAppContainer(AppNavigator);
 
 const Index = () => {
