@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   searchButton: {
     margin: 5,
     fontSize: 28,
-    color: '#ff00bf'
+    color: '#99BADD'
   },
 
   input: {

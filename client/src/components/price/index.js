@@ -75,7 +75,7 @@ class Price extends React.Component {
           <Text style={styles.title}>Economy</Text>
           <Text style={styles.subtitle}>Affordable rides, all to yourself :)</Text>
           
-          <TouchableHighlight onPress={() => this.linkToLyft()} underlayColor='white'>
+          <TouchableHighlight onPress={this.linkToLyft} underlayColor='white'>
             <View style={styles.lyftPriceContainer}>
               <View style={styles.leftSide}>
                 <Ionicons name="ios-car" style={styles.lyftCar} />
@@ -90,7 +90,7 @@ class Price extends React.Component {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => this.linkToUber()} underlayColor="white">
+          <TouchableHighlight onPress={this.linkToUber} underlayColor="white">
             <View style={styles.priceContainer}>
               <View style={styles.leftSide}>
                 <Ionicons name="ios-car" style={styles.uberCar} />
