@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
   priceContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    padding: 10,
+    padding: 5,
     borderColor: 'black',
     borderRadius: 20,
     borderWidth: 1,
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
   lyftPriceContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    padding: 10,
+    padding: 5,
     borderRadius: 20,
     borderWidth: 1,
     marginBottom: 10,
