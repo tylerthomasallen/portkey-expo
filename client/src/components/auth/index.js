@@ -30,7 +30,7 @@ class UserAuth extends Component {
 
   signUp = async () => {
     try {
-      const res = Auth.signUp({ // 3
+      const res = await Auth.signUp({ // 3
         username: 'myCoolUsername',
         password: 'MyCoolP@ssword2!',
         attributes: {
@@ -38,7 +38,8 @@ class UserAuth extends Component {
           email: 'tylerthomasallen@gmail.com'
         }
       })
-      console.log()
+      debugger;
+      console.log(res)
     } catch(err) {
       console.log(err)
     }
