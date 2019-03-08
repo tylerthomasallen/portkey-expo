@@ -5,7 +5,11 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       flex: 1,
       marginTop: 5,
-      marginBottom: 10
+      marginBottom: 10,
+  },
+
+  authContainer: {
+    alignItems: 'center'
   },
 
   upperContainer: {

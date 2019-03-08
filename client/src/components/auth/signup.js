@@ -49,7 +49,7 @@ class SignUp extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View style={`${styles.container} ${styles.authContainer}`}>
 
         <View style={styles.inputContainer}>
           <Text style={styles.searchButton}>Start</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import SearchResult from './search_result';
 import { googlePlaces } from '../../api/google';
@@ -11,14 +11,26 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './routes_styles';
 
 class RouteSearch extends React.Component {
+  
   constructor(props) {
     super(props)
     this.state = {
       title: 'Where are you going?',
       localOrigin: '',
       localDestination: '',
-      results: []
+      results: [],
+      recent: []
     }
+  }
+
+  async componentDidMount() {
+    const recent = JSON.parse(AsyncStorage.getItem('recent') || '[]')
+    await this.setState({recent});
+  }
+
+  async componentWillUnmount() {
+    const { recent } = this.state;
+    await AsyncStorage.setItem('recent', JSON.stringify(recent));
   }
 
   handleInput = async (text, type) => {
@@ -75,16 +87,29 @@ class RouteSearch extends React.Component {
   handlePress = async (location) => {
     const { setOrigin, setDestination } = this.props;
     const { navigate } = this.props.navigation; 
+    const { recent } = this.state;
+
+    if (!recent.includes(location)) {
+      recent.push(location);
+      
+      if (recent.length > 3) {
+        recent.shift()
+      }
+
+      await this.setState({recent});
+    }
 
     if (this.state.title === 'Pickup') {
       await this.setState({ localOrigin: location, results: [] })
       const originCoords = await getLatLng(location);
+      await this.setState({recent});
       await setOrigin({address: location, ...originCoords})
     } else {
       await this.setState({ localDestination: location, results: [] })
       const desCoords = await getLatLng(location);
       await setDestination({address: location, ...desCoords})
     }
+      
 
     if (this.state.localOrigin.length >= 1 && this.state.localDestination.length >= 1) {
       navigate('Home')
@@ -131,6 +156,14 @@ class RouteSearch extends React.Component {
           return (
             <TouchableHighlight key={idx + 1} onPress={() => this.handlePress(location.description)}>
               <SearchResult key={idx} description={location.description}/>
+            </TouchableHighlight>
+            )
+        })}
+
+        {this.state.recent.map((description, idx) => {
+          return (
+            <TouchableHighlight key={idx + 1} onPress={() => this.handlePress(description)}>
+              <SearchResult key={idx} description={description}/>
             </TouchableHighlight>
             )
         })}

@@ -2,20 +2,14 @@ import React from 'react';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, SafeAreaView} from 'react-navigation';
 import HomeScreen from './home';
 import RouteSearch from './route';
-import UserAuth from './auth';
+// import UserAuth from './auth';
 import { Ionicons } from '@expo/vector-icons';
 
-
-// const AppNavigator = createStackNavigator(
-//   { Home: HomeScreen, Route: RouteSearch }, 
-//   { initialRouteName: "Home" }
-// );
 
 const AppNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Route: RouteSearch,
-    User: UserAuth
+    Route: RouteSearch
   },
   {
 
@@ -28,7 +22,8 @@ const AppNavigator = createBottomTabNavigator(
         backgroundColor: 'white'
       },
       safeAreaInset: {
-        bottom: 'never'
+        bottom: 'never',
+        top: 'never'
       }, 
       showIcon: true,
 
